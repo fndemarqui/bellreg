@@ -18,8 +18,17 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/bellreg.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/zibellreg.html">Zero-inflated Bell model</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -76,9 +85,12 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="bellreg.html">bellreg</a></span><span class="op">(</span><span class="va">nf</span> <span class="op">~</span> <span class="va">lroll</span>, data <span class="op">=</span> <span class="va">faults</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'faults' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted.values</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'fit' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  7.669854  9.283402 13.115728  5.480849 10.490012 14.048942  4.493772</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8]  8.918544  6.839669  5.449545  9.177660  6.216917 14.792175  6.422018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15]  9.125241  6.852741  7.553592 13.368553 15.077316  7.539184  7.256719</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22]  3.381117  9.390362  3.705628 10.960934  5.439150 10.898331 11.193574</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [29]  6.892105 10.510059 16.492878  5.938466</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
