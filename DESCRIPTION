@@ -26,5 +26,5 @@ LinkingTo:
     rstan (>= 2.18.1),
     StanHeaders (>= 2.18.0)
 SystemRequirements: GNU make
-URL: https://github.com/fndemarqui/bellreg
+URL: https://github.com/fndemarqui/bellreg, https://fndemarqui.github.io/bellreg/
 BugReports: https://github.com/fndemarqui/bellreg/issues
