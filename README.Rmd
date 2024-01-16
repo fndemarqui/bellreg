@@ -16,40 +16,37 @@ knitr::opts_chunk$set(
 # bellreg
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/fndemarqui/bellreg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fndemarqui/bellreg/actions/workflows/R-CMD-check.yaml)
+[![R build status](https://github.com/fndemarqui/bellreg/workflows/R-CMD-check/badge.svg)](https://github.com/fndemarqui/bellreg/actions)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/bellreg)](https://cran.r-project.org/package=bellreg)
+[![Downloads](https://cranlogs.r-pkg.org/badges/bellreg)](https://cran.r-project.org/package=bellreg)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bellreg?color=orange)](https://cran.r-project.org/package=bellreg)
 <!-- badges: end -->
 
-The goal of bellreg is to ...
+The goal of bellreg is to provide a set of functions to fit  regression models for count data with overdispersion using the Bell distribution. The implemented models account for ordinary and zero-inflated regression models under both frequentist and Bayesian approaches. Theoretical details regarding the models implemented in the package can be found in Castellares et al. (2018) <doi:10.1016/j.apm.2017.12.014> and Lemonte et al. (2020) <doi:10.1080/02664763.2019.1636940>. 
 
 ## Installation
 
-You can install the development version of bellreg like so:
+You can install the development version of bellreg from [GitHub](https://github.com/) with:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("devtools")
+devtools::install_github("fndemarqui/bellreg")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(bellreg)
-## basic example code
+
+data(faults)
+
+# ML approach:
+mle <- bellreg(nf ~ lroll, data = faults, approach = "mle")
+summary(mle)
+
+# Bayesian approach:
+bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
+summary(bayes)
+
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
