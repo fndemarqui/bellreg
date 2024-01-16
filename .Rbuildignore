@@ -9,3 +9,5 @@
 ^pkgdown$
 ^inst/stuff$
 ^\.Rhistory$
+^doc$
+^Meta$

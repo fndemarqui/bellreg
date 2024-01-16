@@ -1,0 +1,34 @@
+---
+title: "Zero-inflated Bell model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Zero-inflated Bell model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bellreg)
+
+data(cells)
+
+# ML approach:
+mle <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")
+summary(mle)
+
+# Bayesian approach:
+bayes <- zibellreg(cells ~ 1|smoker+gender, data = cells, approach = "bayes", refresh = FALSE)
+summary(bayes)
+
+log_lik <- loo::extract_log_lik(bayes$fit)
+loo::loo(log_lik)
+loo::waic(log_lik)
+
+```

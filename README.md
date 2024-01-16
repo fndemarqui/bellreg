@@ -46,8 +46,8 @@ summary(mle)
 #> 
 #> Coefficients:
 #>               Estimate     StdErr z.value   p.value    
-#> (Intercept) 0.98524652 0.33219340  2.9659  0.003018 ** 
-#> lroll       0.00190937 0.00049003  3.8964 9.763e-05 ***
+#> (Intercept) 0.98524063 0.33219476  2.9659  0.003018 ** 
+#> lroll       0.00190934 0.00049003  3.8963 9.766e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
@@ -58,8 +58,8 @@ bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
 #> 
 #> SAMPLING FOR MODEL 'bellreg' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 0.000214 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.14 seconds.
+#> Chain 1: Gradient evaluation took 0.000242 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.42 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -76,15 +76,15 @@ bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 2.044 seconds (Warm-up)
-#> Chain 1:                2.197 seconds (Sampling)
-#> Chain 1:                4.241 seconds (Total)
+#> Chain 1:  Elapsed Time: 2.927 seconds (Warm-up)
+#> Chain 1:                2.618 seconds (Sampling)
+#> Chain 1:                5.545 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'bellreg' NOW (CHAIN 2).
 #> Chain 2: 
-#> Chain 2: Gradient evaluation took 0.000188 seconds
-#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.88 seconds.
+#> Chain 2: Gradient evaluation took 0.000201 seconds
+#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 2.01 seconds.
 #> Chain 2: Adjust your expectations accordingly!
 #> Chain 2: 
 #> Chain 2: 
@@ -101,15 +101,15 @@ bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 2.035 seconds (Warm-up)
-#> Chain 2:                1.916 seconds (Sampling)
-#> Chain 2:                3.951 seconds (Total)
+#> Chain 2:  Elapsed Time: 2.467 seconds (Warm-up)
+#> Chain 2:                2.7 seconds (Sampling)
+#> Chain 2:                5.167 seconds (Total)
 #> Chain 2: 
 #> 
 #> SAMPLING FOR MODEL 'bellreg' NOW (CHAIN 3).
 #> Chain 3: 
-#> Chain 3: Gradient evaluation took 0.000194 seconds
-#> Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 1.94 seconds.
+#> Chain 3: Gradient evaluation took 0.000344 seconds
+#> Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 3.44 seconds.
 #> Chain 3: Adjust your expectations accordingly!
 #> Chain 3: 
 #> Chain 3: 
@@ -126,15 +126,15 @@ bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
 #> Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 3: 
-#> Chain 3:  Elapsed Time: 2.01 seconds (Warm-up)
-#> Chain 3:                2.151 seconds (Sampling)
-#> Chain 3:                4.161 seconds (Total)
+#> Chain 3:  Elapsed Time: 2.492 seconds (Warm-up)
+#> Chain 3:                2.63 seconds (Sampling)
+#> Chain 3:                5.122 seconds (Total)
 #> Chain 3: 
 #> 
 #> SAMPLING FOR MODEL 'bellreg' NOW (CHAIN 4).
 #> Chain 4: 
-#> Chain 4: Gradient evaluation took 0.000188 seconds
-#> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.88 seconds.
+#> Chain 4: Gradient evaluation took 0.000293 seconds
+#> Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 2.93 seconds.
 #> Chain 4: Adjust your expectations accordingly!
 #> Chain 4: 
 #> Chain 4: 
@@ -151,17 +151,17 @@ bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
 #> Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 4: 
-#> Chain 4:  Elapsed Time: 2.005 seconds (Warm-up)
-#> Chain 4:                2.031 seconds (Sampling)
-#> Chain 4:                4.036 seconds (Total)
+#> Chain 4:  Elapsed Time: 2.476 seconds (Warm-up)
+#> Chain 4:                2.279 seconds (Sampling)
+#> Chain 4:                4.755 seconds (Total)
 #> Chain 4:
 summary(bayes)
 #> 
 #> bellreg(formula = nf ~ lroll, data = faults, approach = "bayes")
 #> 
-#>              mean se_mean    sd  2.5%   25%   50%   75% 97.5%    n_eff Rhat
-#> (Intercept) 0.977   0.007 0.329 0.330 0.757 0.974 1.195 1.618 2541.540    1
-#> lroll       0.002   0.000 0.000 0.001 0.002 0.002 0.002 0.003 2774.748    1
+#>              mean se_mean    sd  2.5%   25%   50%   75% 97.5%    n_eff  Rhat
+#> (Intercept) 0.969   0.007 0.332 0.296 0.746 0.974 1.199 1.613 2607.463 1.001
+#> lroll       0.002   0.000 0.000 0.001 0.002 0.002 0.002 0.003 2909.071 1.000
 #> 
 #> Inference for Stan model: bellreg.
 #> 4 chains, each with iter=2000; warmup=1000; thin=1; 

@@ -16,6 +16,7 @@
 #'
 #' @examples
 #' \donttest{
+#' data(faults)
 #' # ML approach:
 #' mle <- bellreg(nf ~ lroll, data = faults, approach = "mle")
 #' summary(mle)

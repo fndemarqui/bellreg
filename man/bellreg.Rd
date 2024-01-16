@@ -37,6 +37,7 @@ Fits the Bell regression model to overdispersed count data.
 }
 \examples{
 \donttest{
+data(faults)
 # ML approach:
 mle <- bellreg(nf ~ lroll, data = faults, approach = "mle")
 summary(mle)
