@@ -23,6 +23,7 @@ Confidence intervals for the regression coefficients
 }
 \examples{
 \donttest{
+data(cells)
 fit <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")
 confint(fit)
 }

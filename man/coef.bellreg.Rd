@@ -19,6 +19,7 @@ Estimated regression coefficients for the bellreg model
 }
 \examples{
 \donttest{
+data(faults)
 fit <- bellreg(nf ~ lroll, data=faults)
 coef(fit)
 }

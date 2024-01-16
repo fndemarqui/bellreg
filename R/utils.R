@@ -12,6 +12,7 @@
 #'
 #' @examples
 #' \donttest{
+#' data(faults)
 #' fit <- bellreg(nf ~ lroll, data = faults)
 #' vcov(fit)
 #' }
@@ -36,6 +37,7 @@ vcov.bellreg <- function(object, ...){
 #'
 #' @examples
 #' \donttest{
+#' data(cells)
 #' fit <- zibellreg(cells ~ smoker + gender|smoker + gender, data = cells)
 #' vcov(fit)
 #' }
@@ -60,6 +62,7 @@ vcov.zibellreg <- function(object, ...){
 #'
 #' @examples
 #' \donttest{
+#' data(faults)
 #' fit <- bellreg(nf ~ lroll, data=faults)
 #' coef(fit)
 #' }
@@ -82,6 +85,7 @@ coef.bellreg <- function(object, ...){
 #'
 #' @examples
 #' \donttest{
+#' data(cells)
 #' fit <- zibellreg(cells ~ smoker + gender|smoker + gender, data = cells)
 #' coef(fit)
 #' }
@@ -113,6 +117,7 @@ coef.zibellreg <- function(object, ...){
 #'
 #' @examples
 #' \donttest{
+#' data(faults)
 #' fit <- bellreg(nf ~ lroll, data = faults)
 #' confint(fit)
 #' }
@@ -152,6 +157,7 @@ confint.bellreg <- function(object, parm = NULL, level=0.95, ...){
 #'
 #' @examples
 #' \donttest{
+#' data(cells)
 #' fit <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")
 #' confint(fit)
 #' }

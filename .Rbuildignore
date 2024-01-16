@@ -11,3 +11,4 @@
 ^\.Rhistory$
 ^doc$
 ^Meta$
+^CRAN-RELEASE\.md$

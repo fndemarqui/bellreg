@@ -20,9 +20,11 @@ This function extracts the pointwise log-likelihood for a bellreg model.
 }
 \examples{
 \donttest{
+data(faults)
 fit <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
 loglik <- extract_log_lik(fit)
 
+data(cells)
 fit <- zibellreg(cells ~ 1|smoker+gender, data = cells, approach = "bayes", chains = 1, iter = 100)
 loglik <- extract_log_lik(fit)
 

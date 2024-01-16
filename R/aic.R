@@ -14,6 +14,7 @@ get_arg_names <- function(...) {
 #' @examples
 #' \donttest{
 #' library(bellreg)
+#' data(faults)
 #' fit1 <- bellreg(nf ~ 1, data = faults, approach = "mle")
 #' fit2 <- bellreg(nf ~ lroll, data = faults, approach = "mle")
 #' AIC(fit1, fit2)
@@ -54,6 +55,7 @@ AIC.bellreg <- function(object, ..., k = 2){
 #' @examples
 #' \donttest{
 #' library(bellreg)
+#' data(cells)
 #' fit1 <- zibellreg(cells ~ 1|1, data = cells, approach = "mle")
 #' fit2 <- zibellreg(cells ~ 1|smoker+gender, data = cells, approach = "mle")
 #' fit3 <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")

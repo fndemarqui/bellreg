@@ -22,6 +22,7 @@ Akaike information criterion for zibellreg objects
 \examples{
 \donttest{
 library(bellreg)
+data(cells)
 fit1 <- zibellreg(cells ~ 1|1, data = cells, approach = "mle")
 fit2 <- zibellreg(cells ~ 1|smoker+gender, data = cells, approach = "mle")
 fit3 <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")

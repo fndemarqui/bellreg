@@ -23,6 +23,7 @@ Confidence intervals for the regression coefficients
 }
 \examples{
 \donttest{
+data(faults)
 fit <- bellreg(nf ~ lroll, data = faults)
 confint(fit)
 }

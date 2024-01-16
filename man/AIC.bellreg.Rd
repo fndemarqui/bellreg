@@ -22,6 +22,7 @@ Akaike information criterion
 \examples{
 \donttest{
 library(bellreg)
+data(faults)
 fit1 <- bellreg(nf ~ 1, data = faults, approach = "mle")
 fit2 <- bellreg(nf ~ lroll, data = faults, approach = "mle")
 AIC(fit1, fit2)

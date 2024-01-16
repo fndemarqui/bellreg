@@ -41,11 +41,12 @@ Fits the Bell regression model to overdispersed count data.
 \examples{
 \donttest{
 # ML approach:
+data(cells)
 mle <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")
 summary(mle)
 
 # Bayesian approach:
-bayes <- zibellreg(cells ~ 1|smoker+gender, data = cells, approach = "bayes")
+bayes <- zibellreg(cells ~ 1|smoker+gender, data = cells, approach = "bayes", refresh = FALSE)
 summary(bayes)
 }
 

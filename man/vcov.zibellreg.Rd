@@ -19,6 +19,7 @@ Covariance of the regression coefficients
 }
 \examples{
 \donttest{
+data(cells)
 fit <- zibellreg(cells ~ smoker + gender|smoker + gender, data = cells)
 vcov(fit)
 }

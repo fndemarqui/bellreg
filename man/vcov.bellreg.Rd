@@ -19,6 +19,7 @@ This function extracts and returns the variance-covariance matrix associated wit
 }
 \examples{
 \donttest{
+data(faults)
 fit <- bellreg(nf ~ lroll, data = faults)
 vcov(fit)
 }

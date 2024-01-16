@@ -19,6 +19,7 @@ Estimated regression coefficients for zibellreg model
 }
 \examples{
 \donttest{
+data(cells)
 fit <- zibellreg(cells ~ smoker + gender|smoker + gender, data = cells)
 coef(fit)
 }

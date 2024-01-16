@@ -12,6 +12,7 @@
 #'
 #' @examples
 #' \donttest{
+#' data(faults)
 #' fit <- bellreg(nf ~ lroll, data = faults)
 #' fitted.values(fit)
 #' }

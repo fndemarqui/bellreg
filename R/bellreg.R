@@ -22,7 +22,7 @@
 #' summary(mle)
 #'
 #' # Bayesian approach:
-#' bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes")
+#' bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes", refresh = FALSE)
 #' summary(bayes)
 #' }
 #'
