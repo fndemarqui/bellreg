@@ -16,7 +16,13 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-GC1BWQQ4HH"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GC1BWQQ4HH');
+</script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -97,18 +103,18 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Zero-inflated regression coefficients:</span></span>
 <span><span class="co">#&gt;             Estimate   StdErr z.value  p.value   </span></span>
-<span><span class="co">#&gt; (Intercept) -1.95195  0.84470 -2.3108 0.020843 * </span></span>
-<span><span class="co">#&gt; smoker       2.17608  0.82292  2.6443 0.008185 **</span></span>
-<span><span class="co">#&gt; gender      -0.49584  0.42061 -1.1788 0.238462   </span></span>
+<span><span class="co">#&gt; (Intercept) -1.95106  0.84387 -2.3120 0.020775 * </span></span>
+<span><span class="co">#&gt; smoker       2.17519  0.82212  2.6458 0.008149 **</span></span>
+<span><span class="co">#&gt; gender      -0.49589  0.42059 -1.1790 0.238394   </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Count regression coefficients:</span></span>
 <span><span class="co">#&gt;              Estimate    StdErr z.value   p.value    </span></span>
-<span><span class="co">#&gt; (Intercept)  0.716563  0.179848  3.9843 6.769e-05 ***</span></span>
-<span><span class="co">#&gt; smoker      -0.611753  0.183402 -3.3356 0.0008512 ***</span></span>
-<span><span class="co">#&gt; gender       0.036318  0.177482  0.2046 0.8378605    </span></span>
+<span><span class="co">#&gt; (Intercept)  0.716665  0.179827  3.9853  6.74e-05 ***</span></span>
+<span><span class="co">#&gt; smoker      -0.611857  0.183387 -3.3364 0.0008486 ***</span></span>
+<span><span class="co">#&gt; gender       0.036281  0.177483  0.2044 0.8380274    </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -123,20 +129,20 @@
 <span><span class="co">#&gt;     approach = "bayes", refresh = FALSE)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Zero-inflated regression coefficients:</span></span>
-<span><span class="co">#&gt;               mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff</span></span>
-<span><span class="co">#&gt; (Intercept) -1.159   0.007 0.333 -1.935 -1.345 -1.121 -0.927 -0.626 2112.735</span></span>
+<span><span class="co">#&gt;               mean se_mean    sd   2.5%    25%    50%   75%  97.5%    n_eff</span></span>
+<span><span class="co">#&gt; (Intercept) -1.164   0.008 0.342 -1.973 -1.353 -1.124 -0.93 -0.598 1644.853</span></span>
 <span><span class="co">#&gt;             Rhat</span></span>
 <span><span class="co">#&gt; (Intercept)    1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Count regression coefficients:</span></span>
 <span><span class="co">#&gt;               mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff</span></span>
-<span><span class="co">#&gt; (Intercept)  0.718   0.003 0.144  0.429  0.622  0.718  0.816  1.005 3254.103</span></span>
-<span><span class="co">#&gt; smoker      -1.075   0.003 0.145 -1.348 -1.175 -1.077 -0.978 -0.783 2383.649</span></span>
-<span><span class="co">#&gt; gender       0.172   0.002 0.139 -0.103  0.075  0.175  0.267  0.440 3415.463</span></span>
-<span><span class="co">#&gt;             Rhat</span></span>
-<span><span class="co">#&gt; (Intercept)    1</span></span>
-<span><span class="co">#&gt; smoker         1</span></span>
-<span><span class="co">#&gt; gender         1</span></span>
+<span><span class="co">#&gt; (Intercept)  0.718   0.003 0.143  0.433  0.623  0.714  0.818  0.994 2824.507</span></span>
+<span><span class="co">#&gt; smoker      -1.074   0.003 0.145 -1.356 -1.173 -1.076 -0.977 -0.779 2363.641</span></span>
+<span><span class="co">#&gt; gender       0.173   0.002 0.139 -0.097  0.080  0.173  0.267  0.441 3109.814</span></span>
+<span><span class="co">#&gt;              Rhat</span></span>
+<span><span class="co">#&gt; (Intercept) 1.000</span></span>
+<span><span class="co">#&gt; smoker      1.000</span></span>
+<span><span class="co">#&gt; gender      1.001</span></span>
 <span><span class="co">#&gt; --- </span></span>
 <span><span class="co">#&gt; Inference for Stan model: zibellreg.</span></span>
 <span><span class="co">#&gt; 4 chains, each with iter=2000; warmup=1000; thin=1; </span></span>
@@ -151,9 +157,9 @@
 <span><span class="co">#&gt; Computed from 4000 by 511 log-likelihood matrix</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          Estimate   SE</span></span>
-<span><span class="co">#&gt; elpd_loo   -626.7 24.8</span></span>
-<span><span class="co">#&gt; p_loo         4.4  0.4</span></span>
-<span><span class="co">#&gt; looic      1253.5 49.5</span></span>
+<span><span class="co">#&gt; elpd_loo   -626.8 24.8</span></span>
+<span><span class="co">#&gt; p_loo         4.6  0.4</span></span>
+<span><span class="co">#&gt; looic      1253.7 49.5</span></span>
 <span><span class="co">#&gt; ------</span></span>
 <span><span class="co">#&gt; Monte Carlo SE of elpd_loo is 0.0.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -164,9 +170,9 @@
 <span><span class="co">#&gt; Computed from 4000 by 511 log-likelihood matrix</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;           Estimate   SE</span></span>
-<span><span class="co">#&gt; elpd_waic   -626.7 24.8</span></span>
-<span><span class="co">#&gt; p_waic         4.4  0.4</span></span>
-<span><span class="co">#&gt; waic        1253.4 49.5</span></span></code></pre></div>
+<span><span class="co">#&gt; elpd_waic   -626.8 24.8</span></span>
+<span><span class="co">#&gt; p_waic         4.6  0.4</span></span>
+<span><span class="co">#&gt; waic        1253.7 49.5</span></span></code></pre></div>
   </main>
 </div>
 
