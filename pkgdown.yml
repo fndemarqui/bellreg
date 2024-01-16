@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   bellreg: bellreg.html
   zibellreg: zibellreg.html
-last_built: 2024-01-16T15:12Z
+last_built: 2024-01-16T17:05Z
 urls:
   reference: https://fndemarqui.github.io/bellreg/reference
   article: https://fndemarqui.github.io/bellreg/articles
