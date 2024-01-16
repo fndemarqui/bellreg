@@ -84,10 +84,23 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="zibellreg.html">zibellreg</a></span><span class="op">(</span><span class="va">cells</span> <span class="op">~</span> <span class="va">smoker</span> <span class="op">+</span> <span class="va">gender</span><span class="op">|</span><span class="va">smoker</span> <span class="op">+</span> <span class="va">gender</span>, data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'cells' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'fit' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             (Intercept)      smoker      gender (Intercept)      smoker</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  0.71330576 -0.66553295 -0.16298588  0.08673820 -0.06934535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> smoker      -0.66553295  0.67705293  0.11232704 -0.07504742  0.07901410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gender      -0.16298588  0.11232704  0.17709624 -0.03597428  0.02393582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  0.08673820 -0.07504742 -0.03597428  0.03235243 -0.02222138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> smoker      -0.06934535  0.07901410  0.02393582 -0.02222138  0.03364720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gender      -0.05318961  0.03933103  0.04238848 -0.02587030  0.01347540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  gender</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) -0.05318961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> smoker       0.03933103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gender       0.04238848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) -0.02587030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> smoker       0.01347540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gender       0.03151035</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

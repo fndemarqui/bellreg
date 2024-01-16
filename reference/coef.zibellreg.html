@@ -84,10 +84,17 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="zibellreg.html">zibellreg</a></span><span class="op">(</span><span class="va">cells</span> <span class="op">~</span> <span class="va">smoker</span> <span class="op">+</span> <span class="va">gender</span><span class="op">|</span><span class="va">smoker</span> <span class="op">+</span> <span class="va">gender</span>, data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'cells' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'fit' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`Degenerated dist.`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      smoker      gender </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.9526094   2.1765224  -0.4959096 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`Bell dist.`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      smoker      gender </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.71658200 -0.61179851  0.03624159 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

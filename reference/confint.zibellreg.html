@@ -92,10 +92,23 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="zibellreg.html">zibellreg</a></span><span class="op">(</span><span class="va">cells</span> <span class="op">~</span> <span class="va">smoker</span><span class="op">+</span><span class="va">gender</span><span class="op">|</span><span class="va">smoker</span><span class="op">+</span><span class="va">gender</span>, data <span class="op">=</span> <span class="va">cells</span>, approach <span class="op">=</span> <span class="st">"mle"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'cells' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'fit' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>longer object length is not a multiple of shorter object length</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>longer object length is not a multiple of shorter object length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`Degenerated dist.`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            2.5%      97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -3.6098838 -0.2958392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.5627315  3.7912689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.3199175  0.3287665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`Bell dist.`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            2.5%      97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.3639732  1.0690284</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.9711372 -0.2521904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.3115406  0.3841506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
