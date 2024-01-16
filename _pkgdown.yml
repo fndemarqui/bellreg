@@ -1,4 +1,6 @@
 url: https://fndemarqui.github.io/bellreg/
 template:
   bootstrap: 5
+  params:
+    ganalytics: G-GC1BWQQ4HH
 
