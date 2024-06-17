@@ -1,16 +1,21 @@
 ## R CMD check results
 
-── R CMD check results ──────────────────────────── bellreg 0.0.2 ────
-Duration: 24m 32.1s
+── R CMD check results ────────────────────────────────────────────────────────────── bellreg 0.0.2.1 ────
+Duration: 3m 6.3s
+
+❯ checking top-level files ... WARNING
+  A complete check needs the 'checkbashisms' script.
+  See section ‘Configure and cleanup’ in the ‘Writing R Extensions’
+  manual.
 
 ❯ checking compiled code ... OK
    WARNING
   ‘qpdf’ is needed for checks on size reduction of PDFs
 
 ❯ checking installed package size ... NOTE
-    installed size is 66.4Mb
+    installed size is 78.6Mb
     sub-directories of 1Mb or more:
-      libs  66.0Mb
+      libs  78.2Mb
 
 ❯ checking dependencies in R code ... NOTE
   Namespace in Imports field not imported from: ‘rstantools’
@@ -19,9 +24,10 @@ Duration: 24m 32.1s
 ❯ checking for GNU extensions in Makefiles ... NOTE
   GNU make is a SystemRequirements.
 
-0 errors ✔ | 1 warning ✖ | 3 notes ✖
+❯ checking compilation flags used ... NOTE
+  Compilation used the following non-portable flag(s):
+    ‘-mno-omit-leaf-frame-pointer’
 
+0 errors ✔ | 2 warnings ✖ | 4 notes ✖
 
-* Package also checked using GHA workflow.
-
-* This is an update from version 0.0.1 to 0.0.2.
+* This is an update from version 0.0.2 to 0.0.2.1
