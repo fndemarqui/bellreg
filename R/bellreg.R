@@ -74,7 +74,7 @@ bellreg <- function(formula, data = NULL, approach = c("mle", "bayes"),
     fit$par <- fit$theta_tilde[-(1:p)]
     B <- c()
     for(i in 1:length(y)){
-      B[i] <- bell(y[i])
+      B[i] <- numbers::bell(y[i])
     }
     fit$value <- fit$value + sum(log(B) - lgamma(y+1)) + n
     AIC <- -2*fit$value + 2*p

@@ -1,7 +1,7 @@
 
 
 #' Probability function, distribution function, quantile function and random generation for the Bell distribution with parameter theta.
-#' @name Bell
+#' @name Belldist
 #' @aliases Bell
 #' @aliases dbell
 #'
@@ -9,7 +9,6 @@
 #' @concept Univariate
 #' @concept Discrete
 #'
-#' @importFrom numbers bell
 #' @export
 #'
 #' @param x	vector of (non-negative integer) quantiles.
@@ -33,7 +32,7 @@
 dbell <- function(x, theta, log = FALSE){
   Bx <- c()
   for(i in 1:length(x)){
-    Bx[i] <- bell(x[i])
+    Bx[i] <- numbers::bell(x[i])
   }
   lf <- x*log(theta) - exp(theta)+1 + log(Bx) - lgamma(x+1)
   if(log==TRUE){
@@ -44,7 +43,7 @@ dbell <- function(x, theta, log = FALSE){
 }
 
 
-#' @rdname Bell
+#' @rdname Belldist
 #' @export
 #'
 pbell <- function(q, theta, lower.tail = TRUE, log.p = FALSE){
@@ -68,7 +67,7 @@ pbell <- function(q, theta, lower.tail = TRUE, log.p = FALSE){
   }
 }
 
-#' @rdname Bell
+#' @rdname Belldist
 #' @export
 #'
 qbell <- function(p, theta, log.p = FALSE){
@@ -89,7 +88,7 @@ qbell <- function(p, theta, log.p = FALSE){
 
 }
 
-#' @rdname Bell
+#' @rdname Belldist
 #' @export
 #'
 rbell <- function(n, theta){
@@ -101,3 +100,7 @@ rbell <- function(n, theta){
   }
   return(x)
 }
+
+
+
+
