@@ -27,7 +27,7 @@ namespace model_bellreg_namespace {
 using stan::model::model_base_crtp;
 using namespace stan::math;
 stan::math::profile_map profiles__;
-static constexpr std::array<const char*, 155> locations_array__ =
+static constexpr std::array<const char*, 157> locations_array__ =
   {" (found before start of program)",
   " (in 'bellreg', line 159, column 2 to column 21)",
   " (in 'bellreg', line 162, column 2 to column 17)",
@@ -38,9 +38,11 @@ static constexpr std::array<const char*, 155> locations_array__ =
   " (in 'bellreg', line 164, column 4 to column 34)",
   " (in 'bellreg', line 163, column 10 to line 165, column 3)",
   " (in 'bellreg', line 163, column 2 to line 168, column 3)",
-  " (in 'bellreg', line 187, column 4 to column 51)",
-  " (in 'bellreg', line 186, column 19 to line 188, column 3)",
-  " (in 'bellreg', line 186, column 2 to line 188, column 3)",
+  " (in 'bellreg', line 188, column 6 to column 49)",
+  " (in 'bellreg', line 187, column 17 to line 189, column 5)",
+  " (in 'bellreg', line 187, column 4 to line 189, column 5)",
+  " (in 'bellreg', line 186, column 19 to line 190, column 3)",
+  " (in 'bellreg', line 186, column 2 to line 190, column 3)",
   " (in 'bellreg', line 171, column 9 to column 10)",
   " (in 'bellreg', line 171, column 2 to column 28)",
   " (in 'bellreg', line 172, column 9 to column 10)",
@@ -251,21 +253,21 @@ inv_logit2(const T0__& lp_arg__, std::ostream* pstream__) {
   (void) DUMMY_VAR__;
   try {
     int n = std::numeric_limits<int>::min();
-    current_statement__ = 44;
+    current_statement__ = 46;
     n = stan::math::num_elements(lp);
-    current_statement__ = 45;
+    current_statement__ = 47;
     stan::math::validate_non_negative_index("x", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> x =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 49;
+    current_statement__ = 51;
     for (int i = 1; i <= n; ++i) {
-      current_statement__ = 47;
+      current_statement__ = 49;
       stan::model::assign(x, (1 / (1 +
         stan::math::exp(
           -stan::model::rvalue(lp, "lp", stan::model::index_uni(i))))),
         "assigning variable x", stan::model::index_uni(i));
     }
-    current_statement__ = 50;
+    current_statement__ = 52;
     return x;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -286,29 +288,29 @@ linkinv_bell(const T0__& lp_arg__, const int& link, std::ostream* pstream__) {
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 58;
+    current_statement__ = 60;
     if (stan::math::logical_eq(link, 1)) {
-      current_statement__ = 57;
+      current_statement__ = 59;
       return stan::math::exp(lp);
     } else {
-      current_statement__ = 56;
+      current_statement__ = 58;
       if (stan::math::logical_eq(link, 2)) {
-        current_statement__ = 55;
+        current_statement__ = 57;
         return lp;
       } else {
-        current_statement__ = 54;
+        current_statement__ = 56;
         if (stan::math::logical_eq(link, 3)) {
-          current_statement__ = 53;
+          current_statement__ = 55;
           return stan::math::square(lp);
         } else {
-          current_statement__ = 52;
+          current_statement__ = 54;
           std::stringstream errmsg_stream__;
           stan::math::stan_print(&errmsg_stream__, "Invalid link");
           throw std::domain_error(errmsg_stream__.str());
         }
       }
     }
-    current_statement__ = 59;
+    current_statement__ = 61;
     return lp;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -329,29 +331,29 @@ linkinv_bern(const T0__& lp_arg__, const int& link, std::ostream* pstream__) {
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 69;
+    current_statement__ = 71;
     if (stan::math::logical_eq(link, 1)) {
-      current_statement__ = 68;
+      current_statement__ = 70;
       return inv_logit2(lp, pstream__);
     } else {
-      current_statement__ = 67;
+      current_statement__ = 69;
       if (stan::math::logical_eq(link, 2)) {
-        current_statement__ = 66;
+        current_statement__ = 68;
         return stan::math::Phi(lp);
       } else {
-        current_statement__ = 65;
+        current_statement__ = 67;
         if (stan::math::logical_eq(link, 3)) {
-          current_statement__ = 64;
+          current_statement__ = 66;
           return stan::math::inv_cloglog(lp);
         } else {
-          current_statement__ = 63;
+          current_statement__ = 65;
           if (stan::math::logical_eq(link, 4)) {
-            current_statement__ = 62;
+            current_statement__ = 64;
             return stan::math::add(
                      stan::math::divide(stan::math::atan(lp),
                        stan::math::pi()), 0.5);
           } else {
-            current_statement__ = 61;
+            current_statement__ = 63;
             std::stringstream errmsg_stream__;
             stan::math::stan_print(&errmsg_stream__, "Invalid link");
             throw std::domain_error(errmsg_stream__.str());
@@ -359,7 +361,7 @@ linkinv_bern(const T0__& lp_arg__, const int& link, std::ostream* pstream__) {
         }
       }
     }
-    current_statement__ = 70;
+    current_statement__ = 72;
     return lp;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -378,19 +380,19 @@ stan::promote_args_t<T0__> lambertW(const T0__& x, std::ostream* pstream__) {
   try {
     local_scalar_t__ y = DUMMY_VAR__;
     local_scalar_t__ w = DUMMY_VAR__;
-    current_statement__ = 74;
+    current_statement__ = 76;
     y = stan::math::sqrt((1 + (stan::math::exp(1) * x)));
-    current_statement__ = 75;
+    current_statement__ = 77;
     w = (-1 + (2.036 *
       stan::math::log(((1 + (1.14956131 * y)) / (1 + (0.45495740 *
         stan::math::log((1 + y))))))));
-    current_statement__ = 76;
-    w = ((w / (1 + w)) * (1 + stan::math::log((x / w))));
-    current_statement__ = 77;
-    w = ((w / (1 + w)) * (1 + stan::math::log((x / w))));
     current_statement__ = 78;
     w = ((w / (1 + w)) * (1 + stan::math::log((x / w))));
     current_statement__ = 79;
+    w = ((w / (1 + w)) * (1 + stan::math::log((x / w))));
+    current_statement__ = 80;
+    w = ((w / (1 + w)) * (1 + stan::math::log((x / w))));
+    current_statement__ = 81;
     return w;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -406,48 +408,48 @@ double bellnumber(const int& n, std::ostream* pstream__) {
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 101;
+    current_statement__ = 103;
     if (stan::math::logical_lt(n, 2)) {
-      current_statement__ = 99;
+      current_statement__ = 101;
       return 1;
     } else {
       int k = std::numeric_limits<int>::min();
-      current_statement__ = 82;
+      current_statement__ = 84;
       stan::math::validate_non_negative_index("B", "n", n);
       Eigen::Matrix<local_scalar_t__,-1,1> B =
         Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-      current_statement__ = 84;
+      current_statement__ = 86;
       stan::math::validate_non_negative_index("Bneu", "n", n);
       Eigen::Matrix<local_scalar_t__,-1,1> Bneu =
         Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-      current_statement__ = 86;
+      current_statement__ = 88;
       stan::model::assign(B, 1, "assigning variable B",
         stan::model::index_uni(1));
-      current_statement__ = 96;
+      current_statement__ = 98;
       for (int i = 1; i <= (n - 1); ++i) {
-        current_statement__ = 87;
+        current_statement__ = 89;
         k = i;
-        current_statement__ = 88;
+        current_statement__ = 90;
         stan::model::assign(Bneu,
           stan::model::rvalue(B, "B", stan::model::index_uni(i)),
           "assigning variable Bneu", stan::model::index_uni(1));
-        current_statement__ = 91;
+        current_statement__ = 93;
         for (int j = 2; j <= (i + 1); ++j) {
-          current_statement__ = 89;
+          current_statement__ = 91;
           stan::model::assign(Bneu,
             (stan::model::rvalue(B, "B", stan::model::index_uni((j - 1))) +
             stan::model::rvalue(Bneu, "Bneu", stan::model::index_uni((j - 1)))),
             "assigning variable Bneu", stan::model::index_uni(j));
         }
-        current_statement__ = 94;
+        current_statement__ = 96;
         for (int j = 1; j <= n; ++j) {
-          current_statement__ = 92;
+          current_statement__ = 94;
           stan::model::assign(B,
             stan::model::rvalue(Bneu, "Bneu", stan::model::index_uni(j)),
             "assigning variable B", stan::model::index_uni(j));
         }
       }
-      current_statement__ = 97;
+      current_statement__ = 99;
       return stan::model::rvalue(Bneu, "Bneu",
                stan::model::index_uni((k + 1)));
     }
@@ -467,12 +469,12 @@ bell_lpmf(const int& x, const T1__& theta, std::ostream* pstream__) {
   try {
     local_scalar_t__ Bx = DUMMY_VAR__;
     local_scalar_t__ lprob = DUMMY_VAR__;
-    current_statement__ = 105;
+    current_statement__ = 107;
     Bx = bellnumber(x, pstream__);
-    current_statement__ = 106;
+    current_statement__ = 108;
     lprob = (((((x * stan::math::log(theta)) - stan::math::exp(theta)) + 1) +
       stan::math::log(Bx)) - stan::math::lgamma((x + 1)));
-    current_statement__ = 107;
+    current_statement__ = 109;
     return lprob;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -491,14 +493,14 @@ loglik_bell(const std::vector<int>& x, const std::vector<T1__>& theta,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 109;
+    current_statement__ = 111;
     stan::math::validate_non_negative_index("lprob", "num_elements(x)",
       stan::math::num_elements(x));
     std::vector<local_scalar_t__> lprob =
       std::vector<local_scalar_t__>(stan::math::num_elements(x), DUMMY_VAR__);
-    current_statement__ = 113;
+    current_statement__ = 115;
     for (int i = 1; i <= stan::math::num_elements(x); ++i) {
-      current_statement__ = 111;
+      current_statement__ = 113;
       stan::model::assign(lprob,
         ((stan::model::rvalue(x, "x", stan::model::index_uni(i)) *
         stan::math::log(
@@ -507,7 +509,7 @@ loglik_bell(const std::vector<int>& x, const std::vector<T1__>& theta,
           stan::model::rvalue(theta, "theta", stan::model::index_uni(i)))),
         "assigning variable lprob", stan::model::index_uni(i));
     }
-    current_statement__ = 114;
+    current_statement__ = 116;
     return stan::math::sum(lprob);
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -535,45 +537,45 @@ loglik_bellreg(const std::vector<int>& y, const T1__& X_arg__, const T2__&
   (void) DUMMY_VAR__;
   try {
     int n = std::numeric_limits<int>::min();
-    current_statement__ = 116;
+    current_statement__ = 118;
     n = stan::math::num_elements(y);
-    current_statement__ = 117;
+    current_statement__ = 119;
     stan::math::validate_non_negative_index("lprob", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> lprob =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 119;
+    current_statement__ = 121;
     stan::math::validate_non_negative_index("lp", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> lp =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 120;
+    current_statement__ = 122;
     stan::model::assign(lp, stan::math::multiply(X, beta),
       "assigning variable lp");
-    current_statement__ = 121;
+    current_statement__ = 123;
     stan::math::validate_non_negative_index("mu", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> mu =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 122;
+    current_statement__ = 124;
     stan::model::assign(mu, linkinv_bell(lp, link, pstream__),
       "assigning variable mu");
-    current_statement__ = 123;
+    current_statement__ = 125;
     stan::math::validate_non_negative_index("theta", "n", n);
     std::vector<local_scalar_t__> theta =
       std::vector<local_scalar_t__>(n, DUMMY_VAR__);
-    current_statement__ = 128;
+    current_statement__ = 130;
     for (int i = 1; i <= n; ++i) {
-      current_statement__ = 125;
+      current_statement__ = 127;
       stan::model::assign(theta,
         stan::math::lambert_w0(
           stan::model::rvalue(mu, "mu", stan::model::index_uni(i))),
         "assigning variable theta", stan::model::index_uni(i));
-      current_statement__ = 126;
+      current_statement__ = 128;
       stan::model::assign(lprob,
         bell_lpmf<false>(
           stan::model::rvalue(y, "y", stan::model::index_uni(i)),
           stan::model::rvalue(theta, "theta", stan::model::index_uni(i)),
           pstream__), "assigning variable lprob", stan::model::index_uni(i));
     }
-    current_statement__ = 129;
+    current_statement__ = 131;
     return lprob;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -611,60 +613,60 @@ loglik_zibellreg(const std::vector<int>& y, const T1__& X_arg__, const T2__&
   (void) DUMMY_VAR__;
   try {
     int n = std::numeric_limits<int>::min();
-    current_statement__ = 131;
+    current_statement__ = 133;
     n = stan::math::num_elements(y);
-    current_statement__ = 132;
+    current_statement__ = 134;
     stan::math::validate_non_negative_index("lprob", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> lprob =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 134;
+    current_statement__ = 136;
     stan::math::validate_non_negative_index("lp1", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> lp1 =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 135;
+    current_statement__ = 137;
     stan::model::assign(lp1, stan::math::multiply(Z, psi),
       "assigning variable lp1");
-    current_statement__ = 136;
+    current_statement__ = 138;
     stan::math::validate_non_negative_index("lp2", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> lp2 =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 137;
+    current_statement__ = 139;
     stan::model::assign(lp2, stan::math::multiply(X, beta),
       "assigning variable lp2");
-    current_statement__ = 138;
+    current_statement__ = 140;
     stan::math::validate_non_negative_index("mu", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> mu =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 139;
+    current_statement__ = 141;
     stan::model::assign(mu, linkinv_bell(lp2, link2, pstream__),
       "assigning variable mu");
-    current_statement__ = 140;
+    current_statement__ = 142;
     stan::math::validate_non_negative_index("omega", "n", n);
     Eigen::Matrix<local_scalar_t__,-1,1> omega =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-    current_statement__ = 141;
+    current_statement__ = 143;
     stan::model::assign(omega, linkinv_bern(lp1, link1, pstream__),
       "assigning variable omega");
-    current_statement__ = 142;
+    current_statement__ = 144;
     stan::math::validate_non_negative_index("theta", "n", n);
     std::vector<local_scalar_t__> theta =
       std::vector<local_scalar_t__>(n, DUMMY_VAR__);
-    current_statement__ = 152;
+    current_statement__ = 154;
     for (int i = 1; i <= n; ++i) {
-      current_statement__ = 144;
+      current_statement__ = 146;
       stan::model::assign(omega,
         stan::math::inv_logit(
           stan::model::rvalue(lp1, "lp1", stan::model::index_uni(i))),
         "assigning variable omega", stan::model::index_uni(i));
-      current_statement__ = 145;
+      current_statement__ = 147;
       stan::model::assign(theta,
         stan::math::lambert_w0(
           stan::model::rvalue(mu, "mu", stan::model::index_uni(i))),
         "assigning variable theta", stan::model::index_uni(i));
-      current_statement__ = 150;
+      current_statement__ = 152;
       if (stan::math::logical_eq(
             stan::model::rvalue(y, "y", stan::model::index_uni(i)), 0)) {
-        current_statement__ = 148;
+        current_statement__ = 150;
         stan::model::assign(lprob,
           stan::math::log_sum_exp(
             stan::math::bernoulli_lpmf<false>(1,
@@ -678,7 +680,7 @@ loglik_zibellreg(const std::vector<int>& y, const T1__& X_arg__, const T2__&
               pstream__))), "assigning variable lprob",
           stan::model::index_uni(i));
       } else {
-        current_statement__ = 146;
+        current_statement__ = 148;
         stan::model::assign(lprob,
           (stan::math::bernoulli_lpmf<false>(0,
              stan::model::rvalue(omega, "omega", stan::model::index_uni(i)))
@@ -690,7 +692,7 @@ loglik_zibellreg(const std::vector<int>& y, const T1__& X_arg__, const T2__&
           stan::model::index_uni(i));
       }
     }
-    current_statement__ = 153;
+    current_statement__ = 155;
     return lprob;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -734,35 +736,35 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      current_statement__ = 26;
+      current_statement__ = 28;
       context__.validate_dims("data initialization", "n", "int",
         std::vector<size_t>{});
       n = std::numeric_limits<int>::min();
-      current_statement__ = 26;
+      current_statement__ = 28;
       n = context__.vals_i("n")[(1 - 1)];
-      current_statement__ = 26;
+      current_statement__ = 28;
       stan::math::check_greater_or_equal(function__, "n", n, 1);
-      current_statement__ = 27;
+      current_statement__ = 29;
       context__.validate_dims("data initialization", "p", "int",
         std::vector<size_t>{});
       p = std::numeric_limits<int>::min();
-      current_statement__ = 27;
-      p = context__.vals_i("p")[(1 - 1)];
-      current_statement__ = 27;
-      stan::math::check_greater_or_equal(function__, "p", p, 1);
-      current_statement__ = 28;
-      stan::math::validate_non_negative_index("y", "n", n);
       current_statement__ = 29;
+      p = context__.vals_i("p")[(1 - 1)];
+      current_statement__ = 29;
+      stan::math::check_greater_or_equal(function__, "p", p, 1);
+      current_statement__ = 30;
+      stan::math::validate_non_negative_index("y", "n", n);
+      current_statement__ = 31;
       context__.validate_dims("data initialization", "y", "int",
         std::vector<size_t>{static_cast<size_t>(n)});
       y = std::vector<int>(n, std::numeric_limits<int>::min());
-      current_statement__ = 29;
-      y = context__.vals_i("y");
-      current_statement__ = 30;
-      stan::math::validate_non_negative_index("X", "n", n);
       current_statement__ = 31;
-      stan::math::validate_non_negative_index("X", "p", p);
+      y = context__.vals_i("y");
       current_statement__ = 32;
+      stan::math::validate_non_negative_index("X", "n", n);
+      current_statement__ = 33;
+      stan::math::validate_non_negative_index("X", "p", p);
+      current_statement__ = 34;
       context__.validate_dims("data initialization", "X", "double",
         std::vector<size_t>{static_cast<size_t>(n), static_cast<size_t>(p)});
       X_data__ = Eigen::Matrix<double,-1,-1>::Constant(n, p,
@@ -770,36 +772,36 @@ public:
       new (&X) Eigen::Map<Eigen::Matrix<double,-1,-1>>(X_data__.data(), n, p);
       {
         std::vector<local_scalar_t__> X_flat__;
-        current_statement__ = 32;
+        current_statement__ = 34;
         X_flat__ = context__.vals_r("X");
-        current_statement__ = 32;
+        current_statement__ = 34;
         pos__ = 1;
-        current_statement__ = 32;
+        current_statement__ = 34;
         for (int sym1__ = 1; sym1__ <= p; ++sym1__) {
-          current_statement__ = 32;
+          current_statement__ = 34;
           for (int sym2__ = 1; sym2__ <= n; ++sym2__) {
-            current_statement__ = 32;
+            current_statement__ = 34;
             stan::model::assign(X, X_flat__[(pos__ - 1)],
               "assigning variable X", stan::model::index_uni(sym2__),
               stan::model::index_uni(sym1__));
-            current_statement__ = 32;
+            current_statement__ = 34;
             pos__ = (pos__ + 1);
           }
         }
       }
-      current_statement__ = 33;
+      current_statement__ = 35;
       context__.validate_dims("data initialization", "link", "int",
         std::vector<size_t>{});
       link = std::numeric_limits<int>::min();
-      current_statement__ = 33;
-      link = context__.vals_i("link")[(1 - 1)];
-      current_statement__ = 33;
-      stan::math::check_greater_or_equal(function__, "link", link, 1);
-      current_statement__ = 33;
-      stan::math::check_less_or_equal(function__, "link", link, 3);
-      current_statement__ = 34;
-      stan::math::validate_non_negative_index("x_mean", "p", p);
       current_statement__ = 35;
+      link = context__.vals_i("link")[(1 - 1)];
+      current_statement__ = 35;
+      stan::math::check_greater_or_equal(function__, "link", link, 1);
+      current_statement__ = 35;
+      stan::math::check_less_or_equal(function__, "link", link, 3);
+      current_statement__ = 36;
+      stan::math::validate_non_negative_index("x_mean", "p", p);
+      current_statement__ = 37;
       context__.validate_dims("data initialization", "x_mean", "double",
         std::vector<size_t>{static_cast<size_t>(p)});
       x_mean_data__ = Eigen::Matrix<double,1,-1>::Constant(p,
@@ -808,22 +810,22 @@ public:
         Eigen::Map<Eigen::Matrix<double,1,-1>>(x_mean_data__.data(), p);
       {
         std::vector<local_scalar_t__> x_mean_flat__;
-        current_statement__ = 35;
+        current_statement__ = 37;
         x_mean_flat__ = context__.vals_r("x_mean");
-        current_statement__ = 35;
+        current_statement__ = 37;
         pos__ = 1;
-        current_statement__ = 35;
+        current_statement__ = 37;
         for (int sym1__ = 1; sym1__ <= p; ++sym1__) {
-          current_statement__ = 35;
+          current_statement__ = 37;
           stan::model::assign(x_mean, x_mean_flat__[(pos__ - 1)],
             "assigning variable x_mean", stan::model::index_uni(sym1__));
-          current_statement__ = 35;
+          current_statement__ = 37;
           pos__ = (pos__ + 1);
         }
       }
-      current_statement__ = 36;
+      current_statement__ = 38;
       stan::math::validate_non_negative_index("x_sd", "p", p);
-      current_statement__ = 37;
+      current_statement__ = 39;
       context__.validate_dims("data initialization", "x_sd", "double",
         std::vector<size_t>{static_cast<size_t>(p)});
       x_sd_data__ = Eigen::Matrix<double,-1,1>::Constant(p,
@@ -832,55 +834,55 @@ public:
         p);
       {
         std::vector<local_scalar_t__> x_sd_flat__;
-        current_statement__ = 37;
+        current_statement__ = 39;
         x_sd_flat__ = context__.vals_r("x_sd");
-        current_statement__ = 37;
+        current_statement__ = 39;
         pos__ = 1;
-        current_statement__ = 37;
+        current_statement__ = 39;
         for (int sym1__ = 1; sym1__ <= p; ++sym1__) {
-          current_statement__ = 37;
+          current_statement__ = 39;
           stan::model::assign(x_sd, x_sd_flat__[(pos__ - 1)],
             "assigning variable x_sd", stan::model::index_uni(sym1__));
-          current_statement__ = 37;
+          current_statement__ = 39;
           pos__ = (pos__ + 1);
         }
       }
-      current_statement__ = 37;
+      current_statement__ = 39;
       stan::math::check_greater_or_equal(function__, "x_sd", x_sd, 0);
-      current_statement__ = 38;
+      current_statement__ = 40;
       context__.validate_dims("data initialization", "approach", "int",
         std::vector<size_t>{});
       approach = std::numeric_limits<int>::min();
-      current_statement__ = 38;
+      current_statement__ = 40;
       approach = context__.vals_i("approach")[(1 - 1)];
-      current_statement__ = 38;
+      current_statement__ = 40;
       stan::math::check_greater_or_equal(function__, "approach", approach, 0);
-      current_statement__ = 38;
+      current_statement__ = 40;
       stan::math::check_less_or_equal(function__, "approach", approach, 1);
-      current_statement__ = 39;
+      current_statement__ = 41;
       context__.validate_dims("data initialization", "mu_beta", "double",
         std::vector<size_t>{});
       mu_beta = std::numeric_limits<double>::quiet_NaN();
-      current_statement__ = 39;
+      current_statement__ = 41;
       mu_beta = context__.vals_r("mu_beta")[(1 - 1)];
-      current_statement__ = 40;
+      current_statement__ = 42;
       context__.validate_dims("data initialization", "sigma_beta", "double",
         std::vector<size_t>{});
       sigma_beta = std::numeric_limits<double>::quiet_NaN();
-      current_statement__ = 40;
+      current_statement__ = 42;
       sigma_beta = context__.vals_r("sigma_beta")[(1 - 1)];
-      current_statement__ = 40;
+      current_statement__ = 42;
       stan::math::check_greater_or_equal(function__, "sigma_beta",
         sigma_beta, 0);
-      current_statement__ = 41;
+      current_statement__ = 43;
       stan::math::validate_non_negative_index("beta_std", "p", p);
-      current_statement__ = 42;
+      current_statement__ = 44;
       stan::math::validate_non_negative_index("beta", "p", p);
-      current_statement__ = 43;
+      current_statement__ = 45;
       log_lik_1dim__ = std::numeric_limits<int>::min();
-      current_statement__ = 43;
+      current_statement__ = 45;
       log_lik_1dim__ = (stan::math::logical_eq(approach, 1) ? n : 0);
-      current_statement__ = 43;
+      current_statement__ = 45;
       stan::math::validate_non_negative_index("log_lik",
         "approach == 1 ? n : 0", log_lik_1dim__);
     } catch (const std::exception& e) {
@@ -951,37 +953,37 @@ public:
           stan::model::index_uni(1));
       }
       {
-        current_statement__ = 13;
+        current_statement__ = 15;
         stan::math::validate_non_negative_index("lp", "n", n);
         Eigen::Matrix<local_scalar_t__,-1,1> lp =
           Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-        current_statement__ = 14;
+        current_statement__ = 16;
         stan::model::assign(lp, stan::math::multiply(X, beta_std),
           "assigning variable lp");
-        current_statement__ = 15;
+        current_statement__ = 17;
         stan::math::validate_non_negative_index("mu", "n", n);
         Eigen::Matrix<local_scalar_t__,-1,1> mu =
           Eigen::Matrix<local_scalar_t__,-1,1>::Constant(n, DUMMY_VAR__);
-        current_statement__ = 16;
+        current_statement__ = 18;
         stan::model::assign(mu, linkinv_bell(lp, link, pstream__),
           "assigning variable mu");
-        current_statement__ = 17;
+        current_statement__ = 19;
         stan::math::validate_non_negative_index("theta", "n", n);
         std::vector<local_scalar_t__> theta =
           std::vector<local_scalar_t__>(n, DUMMY_VAR__);
-        current_statement__ = 21;
+        current_statement__ = 23;
         for (int i = 1; i <= n; ++i) {
-          current_statement__ = 19;
+          current_statement__ = 21;
           stan::model::assign(theta,
             stan::math::lambert_w0(
               stan::model::rvalue(mu, "mu", stan::model::index_uni(i))),
             "assigning variable theta", stan::model::index_uni(i));
         }
-        current_statement__ = 22;
+        current_statement__ = 24;
         lp_accum__.add(loglik_bell(y, theta, pstream__));
-        current_statement__ = 25;
+        current_statement__ = 27;
         if (stan::math::logical_eq(approach, 1)) {
-          current_statement__ = 23;
+          current_statement__ = 25;
           lp_accum__.add(stan::math::normal_lpdf<propto__>(beta_std, mu_beta,
                            sigma_beta));
         }
@@ -1075,12 +1077,15 @@ public:
       Eigen::Matrix<double,-1,1> log_lik =
         Eigen::Matrix<double,-1,1>::Constant(log_lik_1dim__,
           std::numeric_limits<double>::quiet_NaN());
-      current_statement__ = 12;
+      current_statement__ = 14;
       if (stan::math::logical_eq(approach, 1)) {
-        current_statement__ = 10;
-        stan::model::assign(log_lik,
-          loglik_bellreg(y, X, beta_std, link, pstream__),
-          "assigning variable log_lik");
+        current_statement__ = 12;
+        for (int i = 1; i <= n; ++i) {
+          current_statement__ = 10;
+          stan::model::assign(log_lik,
+            loglik_bellreg(y, X, beta, link, pstream__),
+            "assigning variable log_lik");
+        }
       }
       out__.write(log_lik);
     } catch (const std::exception& e) {

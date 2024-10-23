@@ -61,7 +61,7 @@ model{
 
 
 generated quantities{
-  vector[n] log_lik = loglik_zibellreg(y, X, Z, beta_std, psi_std, link1, link2);
+  vector[n] log_lik = loglik_zibellreg(y, X, Z, beta, psi, link1, link2);
 }
 
 

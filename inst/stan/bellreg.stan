@@ -54,7 +54,10 @@ model{
 generated quantities{
   vector[approach == 1 ? n : 0] log_lik;
   if(approach == 1){
-    log_lik = loglik_bellreg(y, X, beta_std, link);
+    for(i in 1:n){
+      log_lik = loglik_bellreg(y, X, beta, link);
+    }
+
   }
 
 }

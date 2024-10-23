@@ -33,7 +33,7 @@ static constexpr std::array<const char*, 167> locations_array__ =
   " (in 'zibellreg', line 167, column 2 to column 21)",
   " (in 'zibellreg', line 170, column 2 to column 16)",
   " (in 'zibellreg', line 171, column 2 to column 17)",
-  " (in 'zibellreg', line 196, column 2 to column 81)",
+  " (in 'zibellreg', line 196, column 2 to column 73)",
   " (in 'zibellreg', line 175, column 4 to column 43)",
   " (in 'zibellreg', line 176, column 4 to column 58)",
   " (in 'zibellreg', line 174, column 7 to line 177, column 3)",
@@ -1256,7 +1256,7 @@ public:
           std::numeric_limits<double>::quiet_NaN());
       current_statement__ = 5;
       stan::model::assign(log_lik,
-        loglik_zibellreg(y, X, Z, beta_std, psi_std, link1, link2, pstream__),
+        loglik_zibellreg(y, X, Z, beta, psi, link1, link2, pstream__),
         "assigning variable log_lik");
       out__.write(log_lik);
     } catch (const std::exception& e) {

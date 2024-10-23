@@ -53,9 +53,6 @@ summary(mle)
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> logLik = -88.96139   AIC = 181.9228
-```
-
-``` r
 
 # Bayesian approach:
 bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes", refresh = FALSE)
@@ -64,9 +61,9 @@ summary(bayes)
 #> bellreg(formula = nf ~ lroll, data = faults, approach = "bayes", 
 #>     refresh = FALSE)
 #> 
-#>              mean se_mean    sd  2.5%   25%   50%   75% 97.5%    n_eff Rhat
-#> (Intercept) 0.974   0.007 0.341 0.305 0.751 0.967 1.205 1.642 2459.956    1
-#> lroll       0.002   0.000 0.000 0.001 0.002 0.002 0.002 0.003 2728.380    1
+#>              mean se_mean    sd  2.5%   25%   50%   75% 97.5%    n_eff  Rhat
+#> (Intercept) 0.984   0.006 0.325 0.358 0.759 0.988 1.207 1.606 2673.556 1.001
+#> lroll       0.002   0.000 0.000 0.001 0.002 0.002 0.002 0.003 2901.735 1.000
 #> 
 #> Inference for Stan model: bellreg.
 #> 4 chains, each with iter=2000; warmup=1000; thin=1; 
