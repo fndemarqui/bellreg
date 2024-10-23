@@ -1,96 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/404.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/articles/bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/articles/zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/AIC.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/AIC.zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/Belldist.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/bell.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/bellreg-package.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/cells.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/coef.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/coef.zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/confint.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/confint.zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/extract_log_lik.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/faults.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/fitted.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/print.summary.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/print.summary.zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/summary.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/summary.zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/vcov.bellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/vcov.zibellreg.html</loc>
-  </url>
-  <url>
-    <loc>https://fndemarqui.github.io/bellreg/reference/zibellreg.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://fndemarqui.github.io/bellreg/404.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/LICENSE-text.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/LICENSE.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/articles/bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/articles/index.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/articles/zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/authors.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/index.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/news/index.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/AIC.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/AIC.zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/Belldist.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/bell.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/bellreg-package.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/cells.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/coef.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/coef.zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/confint.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/confint.zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/extract_log_lik.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/faults.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/fitted.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/index.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/print.summary.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/print.summary.zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/summary.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/summary.zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/vcov.bellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/vcov.zibellreg.html</loc></url>
+<url><loc>https://fndemarqui.github.io/bellreg/reference/zibellreg.html</loc></url>
 </urlset>
+
