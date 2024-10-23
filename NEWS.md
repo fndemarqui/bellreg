@@ -17,4 +17,4 @@
 
 # bellreg 0.0.2.2
 
-* Implementation of Family Objects for Models for compatibility with stas::glm() function.
+* Implementation of bell() function for compatibility with stas::glm() function.

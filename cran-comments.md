@@ -1,7 +1,7 @@
 ## R CMD check results
 
-── R CMD check results ────────────────────────────────────────────────────────────── bellreg 0.0.2.1 ────
-Duration: 3m 6.3s
+── R CMD check results ──────────────────────────────────────────────────────────── bellreg 0.0.2.2 ────
+Duration: 3m 2.6s
 
 ❯ checking top-level files ... WARNING
   A complete check needs the 'checkbashisms' script.
@@ -13,9 +13,12 @@ Duration: 3m 6.3s
   ‘qpdf’ is needed for checks on size reduction of PDFs
 
 ❯ checking installed package size ... NOTE
-    installed size is 78.6Mb
+    installed size is 78.8Mb
     sub-directories of 1Mb or more:
-      libs  78.2Mb
+      libs  78.4Mb
+
+❯ checking for future file timestamps ... NOTE
+  unable to verify current time
 
 ❯ checking dependencies in R code ... NOTE
   Namespace in Imports field not imported from: ‘rstantools’
@@ -28,6 +31,6 @@ Duration: 3m 6.3s
   Compilation used the following non-portable flag(s):
     ‘-mno-omit-leaf-frame-pointer’
 
-0 errors ✔ | 2 warnings ✖ | 4 notes ✖
+0 errors ✔ | 2 warnings ✖ | 5 notes ✖
 
-* This is an update from version 0.0.2 to 0.0.2.1
+* This is an update from version 0.0.2.1 to 0.0.2.2
