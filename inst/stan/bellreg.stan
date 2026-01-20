@@ -6,46 +6,67 @@ functions{
 
 data{
   int<lower=1> n;
-  int<lower=1> p;
+  int<lower=0> p;
   array[n] int y;
   matrix[n, p] X;
+  vector[n] offset;
   int<lower = 1, upper = 3> link;
-  row_vector[p] x_mean;
-  vector<lower=0>[p] x_sd;
   int<lower=0, upper=1> approach;
+  real mu_int;
+  real<lower=0> sigma_int;
   real mu_beta;
-  real<lower=0> sigma_beta;
+  array[p] real sigma_beta;
+  int has_int;
+  row_vector[p] xbar;
+  vector[p] S;
 }
 
+
 parameters{
-  vector[p] beta_std;
+  vector[has_int == 0 ? 0 : 1] coef_intercept;
+  vector[p] coef_beta;
 }
 
 
 transformed parameters{
-  vector[p] beta;
-  if(p==1){
-    beta[1] = beta_std[1]/x_sd[1];
-  }else{
-    beta[2:p] = beta_std[2:p] ./ x_sd[2:p];
-    beta[1] = beta_std[1]/x_sd[1] - x_mean[2:p]*beta[2:p];
+  vector[has_int == 0 ? 0 : 1] intercept;
+  vector[p] beta = coef_beta ./ S;
+  if(has_int == 1){
+    intercept = coef_intercept - xbar*beta;
   }
 }
 
 model{
+  vector[n] lp;
+  vector[n] mu;
+  array[n] int ones = ones_int_array(n);
 
-  vector[n] lp = X*beta_std;
-  vector[n] mu = linkinv_bell(lp, link);
-  array[n] real theta;// = lambert_w0(mu);
+  if(p>0){
+    if(has_int == 1){
+      lp = coef_intercept[ones] + X*coef_beta + offset;
+    }else{
+      lp = xbar*( coef_beta ./ S) + X*coef_beta + offset;
+    }
+
+  }else{
+    lp = coef_intercept[ones] + offset;
+  }
+
+
+  mu = linkinv_bell(lp, link);
+  array[n] real theta;
   for(i in 1:n){
-    //mu[i] = exp(eta[i]);
-    //theta[i] = lambertW(mu[i]);
     theta[i] = lambert_w0(mu[i]); // Stan implementation
   }
 
   target += loglik_bell(y, theta);
   if(approach==1){
-    beta_std ~ normal(mu_beta, sigma_beta);
+    if(p>0){
+      coef_beta ~ normal(mu_beta, sigma_beta);
+    }
+    if(has_int==1){
+      coef_intercept ~ normal(mu_int, sigma_int);
+    }
   }
 
 }
@@ -54,12 +75,8 @@ model{
 generated quantities{
   vector[approach == 1 ? n : 0] log_lik;
   if(approach == 1){
-    for(i in 1:n){
-      log_lik = loglik_bellreg(y, X, beta, link);
-    }
-
+    log_lik = loglik_bellreg(y, X, offset, coef_intercept, coef_beta, link, has_int, xbar, S);
   }
-
 }
 
 

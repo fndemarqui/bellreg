@@ -1,5 +1,16 @@
 
 
+log_belln <- function(n){
+  if(n > 218){ # asymptotic approximation
+    b <- exp(LambertW::W(n - 0.5))
+    return(n*log(b) + b - n - 0.5 + 0.5*(log(b) - log(b + n)))
+  }else{ # exactly calculation
+    lbn = log(numbers::bell(n))
+  }
+  return(lbn)
+}
+
+
 #' Probability function, distribution function, quantile function and random generation for the Bell distribution with parameter theta.
 #' @name Belldist
 #' @aliases Bell
@@ -30,11 +41,11 @@
 #'
 
 dbell <- function(x, theta, log = FALSE){
-  Bx <- c()
+  lbn <- c()
   for(i in 1:length(x)){
-    Bx[i] <- numbers::bell(x[i])
+    lbn[i] <- log_belln(x[i])
   }
-  lf <- x*log(theta) - exp(theta)+1 + log(Bx) - lgamma(x+1)
+  lf <- x*log(theta) - expm1(theta) + lbn - lgamma(x+1)
   if(log==TRUE){
     return(lf)
   }else{
@@ -89,6 +100,7 @@ qbell <- function(p, theta, log.p = FALSE){
 }
 
 #' @rdname Belldist
+#' @importFrom extraDistr rtpois
 #' @export
 #'
 rbell <- function(n, theta){

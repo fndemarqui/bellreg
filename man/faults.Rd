@@ -12,7 +12,7 @@ A data frame with 32 rows and 2 variables:
 }
 }
 \description{
-Data set taken from \insertCite{1982_Hinde}{bellreg} and posteriorly analyzed by \insertCite{2018_Castellares}{bellreg}. The data contains the number of faults in rolls of fabric of different lengths.
+Data set taken from \insertCite{1982_Hinde;textual}{bellreg} and posteriorly analyzed by \insertCite{2018_Castellares;textual}{bellreg}. The data contains the number of faults in rolls of fabric of different lengths.
 }
 \references{
 \insertAllCited{}

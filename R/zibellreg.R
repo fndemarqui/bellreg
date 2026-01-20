@@ -11,7 +11,7 @@
 #' @param link1 assumed link function for degenerate distribution (logit, probit, cloglog, cauchy); default is logit.
 #' @param link2 assumed link function for count distribution (log, sqrt or identiy); default is log.
 #' @param hessian hessian logical; If TRUE (default), the hessian matrix is returned when approach="mle".
-#' @param hyperpars a list containing the hyperparameters associated with the prior distribution of the regression coefficients; if not specified then default choice is hyperpars = c(mu_psi = 0, sigma_psi = 10, mu_beta = 0, sigma_beta = 10).
+#' @param priors a list containing the prior specification for the parameters; if NULL, default prior are used.
 #' @param ... further arguments passed to either `rstan::optimizing` or `rstan::sampling`.
 #' @return zibellreg returns an object of class "zibellreg" containing the fitted model.
 #'
@@ -29,7 +29,7 @@
 #'
 zibellreg<- function(formula, data, approach = c("mle", "bayes"), hessian = TRUE,
                      link1 = c("logit", "probit", "cloglog", "cauchy"), link2 = c("log", "sqrt", "identity"),
-                   hyperpars = list(mu_psi=0, sigma_psi=10, mu_beta=0, sigma_beta=10), ...){
+                     priors = prior_spec(list(intercept ~ normal(0, 10), beta ~ normal(0, 2.5)), autoscale = TRUE), ...){
   approach <- match.arg(approach)
   link1 <- match.arg(link1)
   link2 <- match.arg(link2)
@@ -41,53 +41,60 @@ zibellreg<- function(formula, data, approach = c("mle", "bayes"), hessian = TRUE
   Xlabels <- colnames(X)
   Zlabels <- colnames(Z)
   y <- stats::model.response(mf)
+
+
+  has_int_z <- "(Intercept)" %in% Zlabels
+  if(has_int_z){
+    Z <- Z[,-1, drop = FALSE]
+  }
+
+  has_int_x <- "(Intercept)" %in% Xlabels
+  if(has_int_x){
+    X <- X[,-1, drop = FALSE]
+  }
+
+
   n <- nrow(X)
   p <- ncol(X)
   q <- ncol(Z)
 
-  if(p>1){
-    if(match("(Intercept)", Xlabels)==1){
-      X_std <- scale(X[,-1])
-      x_mean <- array(c(0, attr(X_std, "scaled:center")))
-      x_sd <- array(c(1, attr(X_std, "scaled:scale")))
-      X_std <- cbind(1, X_std)
-      Delta_x <- diag(1/x_sd)
-      Delta_x[1,] <- Delta_x[1,] -  x_mean/x_sd
-    }else{
-      X_std <- scale(X)
-      x_mean <- array(attr(X_std, "scaled:center"))
-      x_sd <- array(attr(X_std, "scaled:scale"))
-      Delta_x <- diag(1/x_sd)
-    }
-  }else{
-    X_std <- X
-    x_mean <- array(0)
-    x_sd <- array(1)
-    Delta_x <- diag(n)
+  offset1 <- stats::model.offset(Formula::model.part(formula, data = mf, rhs = 1, terms = TRUE))
+  offset2 <- stats::model.offset(Formula::model.part(formula, data = mf, rhs = 2, terms = TRUE))
+
+  if(is.null(offset1)){
+    offset1 <- rep(0, n)
   }
 
+  if(is.null(offset2)){
+    offset2 <- rep(0, n)
+  }
 
-  if(q>1){
-    if(match("(Intercept)", Zlabels)==1){
-      Z_std <- scale(Z[,-1])
-      z_mean <- array(c(0, attr(Z_std, "scaled:center")))
-      z_sd <- array(c(1, attr(Z_std, "scaled:scale")))
-      Z_std <- cbind(1, Z_std)
-      Delta_z <- diag(1/z_sd)
-      Delta_z[1,] <- Delta_z[1,] -  z_mean/z_sd
-    }else{
-      Z_std <- scale(Z)
-      z_mean <- array(attr(Z_std, "scaled:center"))
-      z_sd <- array(attr(Z_std, "scaled:scale"))
-      Delta_z <- diag(1/z_sd)
-    }
+  priors <- check_priors(priors, model = "zibellreg")
+
+  mu_int <- priors$intercept$mu
+  sigma_int <- priors$intercept$sigma
+  mu_psi <- priors$psi$mu
+  sigma_psi <- priors$psi$sigma
+  mu_beta <- priors$beta$mu
+  sigma_beta <- priors$beta$sigma
+  autoscale <- priors$autoscale
+
+  if(isTRUE(autoscale)){
+    Z <- scale(Z)
+    att <- attributes(Z)
+    zbar <- array(att$`scaled:center`, dim = q)
+    Sz <- array(att$`scaled:scale`, dim = q)
+
+    X <- scale(X)
+    att <- attributes(X)
+    xbar <- array(att$`scaled:center`, dim = p)
+    Sx <- array(att$`scaled:scale`, dim = p)
   }else{
-      Z_std <- Z
-      z_mean <- array(0)
-      z_sd <- array(1)
-      Delta_z <- diag(n)
-    }
-
+    zbar <- array(0, dim = q)
+    Sz <-  array(1, dim = q)
+    xbar <- array(0, dim = p)
+    Sx <-  array(1, dim = p)
+  }
 
   Link1 <- switch(link1,
                   "logit" = 1,
@@ -104,47 +111,49 @@ zibellreg<- function(formula, data, approach = c("mle", "bayes"), hessian = TRUE
 
 
 
-  stan_data <- list(y=y, X=X_std, Z=Z_std, n=n, p=p, q=q, x_mean=x_mean, x_sd=x_sd, z_mean=z_mean, z_sd=z_sd,
-                    mu_beta = hyperpars$mu_beta, sigma_beta=hyperpars$sigma_beta,
-                    mu_psi = hyperpars$mu_psi, sigma_psi=hyperpars$sigma_psi,
-                    approach=0, link1 = Link1, link2 = Link2)
+  stan_data <- list(y=y, X=X, Z=Z, n=n, p=p, q=q, xbar=xbar, Sx=Sx, zbar=zbar, Sz=Sz,
+                    mu_psi = mu_psi, sigma_psi = array(sigma_psi*rep(1, q)),
+                    mu_beta = mu_beta, sigma_beta = array(sigma_beta*rep(1, p)),
+                    mu_int = mu_int, sigma_int = sigma_int, has_int_z = has_int_z, has_int_x = has_int_x,
+                    approach=0, link1 = Link1, link2 = Link2, offset1 = offset1, offset2 = offset2)
 
 
+  p <- p + has_int_x
+  q <- q + has_int_z
 
   if(approach=="mle"){
-    fit <- rstan::optimizing(stanmodels$zibellreg, hessian=hessian,
-                             data=stan_data, verbose=FALSE, ...)
-    if(hessian==TRUE){
-      fit$hessian <- - fit$hessian
-    }
-    fit$par <- fit$theta_tilde[-(1:(p+q))]
+    fit <- rstan::optimizing(stanmodels$zibellreg, hessian=TRUE,
+                             data=stan_data, verbose=FALSE, init = 0, ...)
+    o <- grep("coef_", names(fit$par))
+    fit$par <- fit$par[-o]
+    V <- MASS::ginv(-fit$hessian)
+    V <- update_vcov_zibellreg(V, zbar, Sz, xbar, Sx, has_int_z, has_int_x)
     AIC <- -2*fit$value + 2*(p+q)
-    fit <- list(fit=fit, logLik = fit$value, AIC = AIC, Delta = magic::adiag(Delta_z, Delta_x))
+    fit <- list(fit=fit, loglik = fit$value, AIC = AIC, V = V)
   }else{
     stan_data$approach <- 1
     fit <- rstan::sampling(stanmodels$zibellreg, data=stan_data, verbose=FALSE, ...)
     fit <- list(fit=fit)
+    fit$priors <- priors
   }
 
 
   fit$n <- n
   fit$p <- p
   fit$q <- q
-  # fit$x_mean <- x_mean
-  # fit$x_sd <- x_sd
-  # fit$z_mean <- z_mean
-  # fit$z_sd <- z_sd
-  # fit$v_sd <- c(z_sd, x_sd)
 
 
   fit$call <- match.call()
   fit$formula <- stats::formula(Terms)
   fit$terms <- stats::terms.formula(formula)
+  fit$mf <- mf
   fit$labels1 <- Zlabels
   fit$labels2 <- Xlabels
   fit$approach <- approach
   fit$link1 <- link1
   fit$link2 <- link2
+  fit$offset1 <- offset1
+  fit$offset2 <- offset2
   class(fit) <- "zibellreg"
   return(fit)
 }

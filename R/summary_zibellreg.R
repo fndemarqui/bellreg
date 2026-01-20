@@ -23,6 +23,7 @@ print.summary.zibellreg <- function(x, ...){
   }else{
     cat("Call:\n")
     print(x$call)
+    print(x$priors)
     cat("\n")
     cat("Zero-inflated regression coefficients:\n")
     print(x$coefficients1)
@@ -54,11 +55,8 @@ summary.zibellreg <- function(object, ...){
   p <- object$p
   q <- object$q
   if(object$approach=="mle"){
-    k <- p+q
-    labels <- object$labels
-    coefficients <- object$fit$par[1:k]
+    coefficients <- coef(object)
     V <- vcov(object)
-
     se <- sqrt(diag(V))
     zval <- coefficients / se
     TAB <- cbind(Estimate = coefficients,
@@ -66,20 +64,13 @@ summary.zibellreg <- function(object, ...){
                  z.value = zval,
                  p.value = 2*stats::pnorm(-abs(zval)))
 
-    if(q==1){
-      TAB1 <- t(as.matrix(TAB[1:q,]))
-    }else{
-      TAB1 <- TAB[1:q,]
-    }
-    if(p==1){
-      TAB2 <- t(as.matrix(TAB[-(1:q),]))
-    }else{
-      TAB2 <- TAB[-(1:q),]
-    }
+
+    TAB1 <- TAB[1:q, , drop = FALSE]
+    TAB2 <- TAB[-(1:q), , drop = FALSE]
     rownames(TAB1) <- object$labels1
     rownames(TAB2) <- object$labels2
-
     res <- list(call=object$call,
+                coefficients = TAB,
                 coefficients1=TAB1, coefficients2=TAB2,
                 logLik=object$fit$value, AIC=object$AIC, approach=object$approach)
 
@@ -88,18 +79,21 @@ summary.zibellreg <- function(object, ...){
   else{
     labels1 <- object$labels1
     labels2 <- object$labels2
-    s1 <- rstan::summary(object$fit, pars=c("psi"))
-    s2 <- rstan::summary(object$fit, pars=c("beta"))
-    TAB1 <- round(s1$summary, digits = 3)
-    TAB2 <- round(s2$summary, digits = 3)
+    s <- rstan::summary(object$fit)
+    TAB <- round(s$summary, digits = 4)
+    rn <- row.names(TAB)
+    o <- c(grep("log_lik", rn), grep("coef_", rn), grep("lp__", rn))
+    TAB <- TAB[-o, , drop = FALSE]
+    TAB1 <- TAB[1:q, , drop = FALSE]
+    TAB2 <- TAB[-(1:q), , drop = FALSE]
     rownames(TAB1) <- labels1
     rownames(TAB2) <- labels2
 
 
     n_kept <- object$fit@sim$n_save - object$fit@sim$warmup2
     res <- list(call=object$call,
-                coefficients1=TAB1, coefficients2=TAB2,
-                n_kept=n_kept, model_name=object$fit@model_name,
+                coefficients1=TAB1[, -c(2, 5, 7)], coefficients2=TAB2[, -c(2, 5, 7)],
+                n_kept=n_kept, model_name=object$fit@model_name, priors = object$priors,
                 chains=object$fit@sim$chains, warmup=object$fit@sim$warmup,
                 thin=object$fit@sim$thin, iter=object$fit@sim$iter, approach=object$approach)
   }

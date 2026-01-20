@@ -1,4 +1,37 @@
 
+# auxiliary function to center covariates
+center <- function(x, xbar, n, p){
+  return(x - xbar)
+}
+
+get_D <- function(bar, S, has_int){
+  if(has_int > 0){
+    dev <- c(1, -bar/S)
+    D <- diag(c(1, 1/S))
+    D[1,] <- dev
+  }else{
+    dev <- c(-1/S)
+    k <- length(dev)
+    D <- diag(dev, nrow = k, ncol = k)
+  }
+  return(D)
+}
+
+# auxiliary function to compute new covariance function after centering covariates
+update_vcov_bellreg <- function(V, xbar, S, has_int){
+  D <- get_D(xbar, S, has_int)
+  V <- D%*%V%*%t(D)
+  return(V)
+}
+
+# auxiliary function to compute new covariance function after centering covariates
+update_vcov_zibellreg <- function(V, zbar, Sz, xbar, Sx, has_int_z, has_int_x){
+  D1 <- get_D(zbar, Sz, has_int_z)
+  D2 <- get_D(xbar, Sx, has_int_x)
+  D <- magic::adiag(D1, D2)
+  V <- D%*%V%*%t(D)
+  return(V)
+}
 
 #---------------------------------------------
 #' Variance-covariance matrix for a bellreg model
@@ -18,12 +51,7 @@
 #' }
 #'
 vcov.bellreg <- function(object, ...){
-  Delta <- object$Delta
-  V <- MASS::ginv(object$fit$hessian)
-  V <- Delta%*%V%*%t(Delta)
-  colnames(V) <- object$labels
-  rownames(V) <- object$labels
-  return(V)
+  return(object$V)
 }
 
 #---------------------------------------------
@@ -43,11 +71,11 @@ vcov.bellreg <- function(object, ...){
 #' }
 #'
 vcov.zibellreg <- function(object, ...){
-  Delta <- object$Delta
-  V <- MASS::ginv(object$fit$hessian)
-  V <- Delta%*%V%*%t(Delta)
-  colnames(V) <- with(object, c(labels1, labels2))
-  rownames(V) <- with(object, c(labels1, labels2))
+  labels1 <- paste0("zero-", object$labels1)
+  labels2 <- paste0("count-", object$labels2)
+  V <- object$V
+  colnames(V) <- c(labels1, labels2)
+  rownames(V) <- c(labels1, labels2)
   return(V)
 }
 
@@ -91,16 +119,11 @@ coef.bellreg <- function(object, ...){
 #' }
 #'
 coef.zibellreg <- function(object, ...){
-  coefs <- object$fit$par
-  p <- object$p
-  q <- object$q
-  coeffs1 <- coefs[1:q]
-  coeffs2 <- coefs[(q+1):(q+p)]
-  names(coeffs1) <- object$labels1
-  names(coeffs2) <- object$labels2
-  coeffs1
-  coeffs2
-  coeffs <- list("Degenerated dist." = coeffs1, "Bell dist." = coeffs2)
+  coeffs <- object$fit$par
+  labels1 <- paste0("zero-", object$labels1)
+  labels2 <- paste0("count-", object$labels2)
+  labels <- c(labels1, labels2)
+  names(coeffs) <- labels
   return(coeffs)
 }
 
@@ -123,10 +146,8 @@ coef.zibellreg <- function(object, ...){
 #' }
 #'
 confint.bellreg <- function(object, parm = NULL, level=0.95, ...){
-  p <- object$p
-  q <- object$q
   V <- vcov(object)
-  par.hat <- object$fit$par[1:p]
+  par.hat <- object$fit$par
   alpha <- 1-level
   d <- stats::qnorm(1 - alpha/2)*sqrt(diag(V))
   lower <- par.hat - d
@@ -134,6 +155,7 @@ confint.bellreg <- function(object, parm = NULL, level=0.95, ...){
   CI <- cbind(lower, upper)
   labels <- round(100*(c(alpha/2, 1-alpha/2)),1)
   colnames(CI) <- paste0(labels, "%")
+  rownames(CI) <- object$labels
   if(is.null(parm)){
     return(CI)
   }else{
@@ -164,22 +186,16 @@ confint.bellreg <- function(object, parm = NULL, level=0.95, ...){
 #'
 
 confint.zibellreg <- function(object, parm = NULL, level=0.95, ...){
-  p <- object$p
-  q <- object$q
   V <- vcov(object)
-  par.hat <- object$fit$par
+  estimates <- coef(object)
   alpha <- 1-level
   d <- stats::qnorm(1 - alpha/2)*sqrt(diag(V))
-  lower <- par.hat - d
-  upper <- par.hat + d
+  lower <- estimates - d
+  upper <- estimates + d
   ci <- cbind(lower, upper)
   labels <- round(100*(c(alpha/2, 1-alpha/2)),1)
   colnames(ci) <- paste0(labels, "%")
-  # if(!is.null(parm)){
-  #   ci <- ci[parm, ,drop = FALSE]
-  # }
-  CI <- list("Degenerated dist." = ci[1:p, ], "Bell dist." = ci[(q+1):(q+p),])
-  return(CI)
+  return(ci)
 }
 
 

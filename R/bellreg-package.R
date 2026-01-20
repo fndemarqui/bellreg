@@ -8,6 +8,7 @@
 #' @useDynLib bellreg, .registration = TRUE
 #' @import methods
 #' @import Rcpp
+#' @import rstantools
 #' @importFrom dplyr %>%
 #' @importFrom Rdpack reprompt
 #' @importFrom rstan sampling

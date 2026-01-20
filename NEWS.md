@@ -18,3 +18,13 @@
 # bellreg 0.0.2.2
 
 * Implementation of bell() function for compatibility with stas::glm() function.
+
+
+# bellreg 0.1.0
+
+* Update of bellreg() function to accommodate . in model's formula
+* Inclusion of offset terms in the linear predictors.
+* coef.zibellreg() function now returns a vector of regression coefficients.
+* confint.zibellreg() function now returns matrix with confidence interval limits.
+* Inclusion of tidy methods for bellreg and zibellreg objects
+* Implementation of prior_spec() function to specify prior distributions for model parameters.

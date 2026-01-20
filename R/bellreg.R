@@ -8,9 +8,8 @@
 #' @param formula an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted.
 #' @param data an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model. If not found in data, the variables are taken from environment(formula), typically the environment from which ypbp is called.
 #' @param approach approach to be used to fit the model (mle: maximum likelihood; bayes: Bayesian approach).
-#' @param hessian hessian logical; If TRUE (default), the hessian matrix is returned when approach="mle".
 #' @param link assumed link function (log, sqrt or identiy); default is log.
-#' @param hyperpars a list containing the hyperparameters associated with the prior distribution of the regression coefficients; if not specified then default choice is hyperpars = c(mu_beta = 0, sigma_beta = 10).
+#' @param priors a list containing the prior specification for the parameters; if NULL, default prior are used.
 #' @param ... further arguments passed to either `rstan::optimizing` or `rstan::sampling`.
 #' @return bellreg returns an object of class "bellreg" containing the fitted model.
 #'
@@ -27,31 +26,58 @@
 #' }
 #'
 bellreg <- function(formula, data = NULL, approach = c("mle", "bayes"),
-                    hessian = TRUE, link = c("log", "sqrt", "identity"),
-                    hyperpars = list(mu_beta=0, sigma_beta=10), ...){
+                    link = c("log", "sqrt", "identity"),
+                    priors = prior_spec(list(intercept ~ normal(0, 10), beta ~ normal(0, 2.5)), autoscale = TRUE), ...){
   approach <- match.arg(approach)
   link <- match.arg(link)
-  mf <- stats::model.frame(formula=formula, data=data)
-  Terms <- stats::terms(mf)
-  X <- as.matrix(stats::model.matrix(attr(mf, "terms"), data=mf))
+  Call <- match.call()
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula", "data"), names(mf), 0L)
+  mf <- mf[c(1L, m)]
+  mf[[1L]] <- quote(stats::model.frame)
+  mf <- eval(mf, parent.frame())
+  mt <- attr(mf, "terms")
+  X <- stats::model.matrix(mt, mf, ...)
   labels <- colnames(X)
   y <- stats::model.response(mf)
   n <- nrow(X)
-  p <- ncol(X)
 
-  if(match("(Intercept)", labels)==1){
-    X_std <- scale(X[,-1])
-    x_mean <- array(c(0, attr(X_std, "scaled:center")))
-    x_sd <- array(c(1, attr(X_std, "scaled:scale")))
-    X_std <- cbind(1, X_std)
-    Delta <- diag(1/x_sd)
-    Delta[1,] <- Delta[1,] -  x_mean/x_sd
-  }else{
-    X_std <- scale(X)
-    x_mean <- array(attr(X_std, "scaled:center"))
-    x_sd <- array(attr(X_std, "scaled:scale"))
-    Delta <- diag(1/x_sd)
+  offset <- stats::model.offset(mf)
+  if(is.null(offset)){
+    offset <- rep(0, n)
   }
+
+  has_int <- "(Intercept)" %in% labels
+  if(has_int){
+    X <- X[,-1, drop = FALSE]
+  }
+
+  p <- ncol(X)
+  has_int <- as.numeric(has_int)
+
+  priors <- check_priors(priors, model = "bellreg")
+
+  mu_int <- priors$intercept$mu
+  sigma_int <- priors$intercept$sigma
+  mu_beta <- priors$beta$mu
+  sigma_beta <- priors$beta$sigma
+
+  if(approach == "bayes"){
+    autoscale = priors$autoscale
+  }else{
+    autoscale = TRUE
+  }
+
+  if(isTRUE(autoscale)){
+    X <- scale(X)
+    att <- attributes(X)
+    xbar <- array(att$`scaled:center`, dim = p)
+    S <- array(att$`scaled:scale`, dim = p)
+  }else{
+    xbar <- array(0, dim = p)
+    S <-  array(1, dim = p)
+  }
+
 
   Link <- switch(link,
     "log" = 1,
@@ -59,44 +85,55 @@ bellreg <- function(formula, data = NULL, approach = c("mle", "bayes"),
     "identity" = 3
   )
 
-  stan_data <- list(y=y, X=X_std, n=n, p=p, x_mean=x_mean, x_sd=x_sd,
-                    mu_beta = hyperpars$mu_beta, sigma_beta=hyperpars$sigma_beta,
-                    approach=0, link = Link)
+  stan_data <- list(y=y, X=X, n=n, p=p, xbar=xbar, S = S,
+                    mu_beta = mu_beta, sigma_beta = array(sigma_beta*rep(1, p)),
+                    mu_int = mu_int, sigma_int = sigma_int,
+                    approach=0, link = Link, offset = offset, has_int = has_int)
 
 
+  p <- p + has_int
 
   if(approach=="mle"){
-    fit <- rstan::optimizing(stanmodels$bellreg, hessian=hessian,
-                             data=stan_data, verbose=FALSE, ...)
-    if(hessian==TRUE){
-      fit$hessian <- - fit$hessian
+    fit <- rstan::optimizing(stanmodels$bellreg, hessian = TRUE,
+                             data = stan_data, verbose = FALSE, init = 0, ...)
+
+    o <- grep("coef_", names(fit$par))
+    fit$par <- fit$par[-o]
+    V <- MASS::ginv(-fit$hessian)
+    if(p>0){
+      V <- update_vcov_bellreg(V, xbar, S, has_int)
     }
-    fit$par <- fit$theta_tilde[-(1:p)]
-    B <- c()
+
+    colnames(V) <- labels
+    rownames(V) <- labels
+
+    lbn <- c()
     for(i in 1:length(y)){
-      B[i] <- numbers::bell(y[i])
+      lbn[i] <- log_belln(y[i])
     }
-    fit$value <- fit$value + sum(log(B) - lgamma(y+1)) + n
+    # n included here because loglik = y*log(theta) - exp(theta) in Stan
+    fit$value <- fit$value + sum(lbn - lgamma(y+1)) + n
     AIC <- -2*fit$value + 2*p
-    fit <- list(fit=fit, logLik = fit$value, AIC = AIC, Delta = Delta)
+    fit <- list(fit=fit, loglik = fit$value, AIC = AIC, V=V)
   }else{
     stan_data$approach <- 1
-    fit <- rstan::sampling(stanmodels$bellreg, data=stan_data, verbose=FALSE, ...)
+    fit <- rstan::sampling(stanmodels$bellreg, data = stan_data, verbose = FALSE, ...)
     fit <- list(fit=fit)
+    fit$priors <- priors
   }
 
   fit$mf <- mf
   fit$n <- n
   fit$p <- p
-  # fit$x_mean <- x_mean
-  # fit$x_sd <- x_sd
 
   fit$call <- match.call()
-  fit$formula <- stats::formula(Terms)
-  fit$terms <- stats::terms.formula(formula)
+  fit$formula <- stats::formula(mt)
+  fit$terms <- mt
+  fit$mf <- mf
   fit$labels <- labels
   fit$approach <- approach
   fit$link <- link
+  fit$offset <- offset
   class(fit) <- "bellreg"
   return(fit)
 }

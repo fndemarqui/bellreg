@@ -11,57 +11,65 @@ data {
   array[n] int<lower=0> y;
   matrix[n, p] X;
   matrix[n, q] Z;
+  vector[n] offset1;
+  vector[n] offset2;
   int link1;
   int link2;
-  row_vector[p] x_mean;
-  vector<lower=0>[p] x_sd;
-  row_vector[q] z_mean;
-  vector<lower=0>[q] z_sd;
+  row_vector[p] xbar;
+  vector<lower=0>[p] Sx;
+  row_vector[q] zbar;
+  vector<lower=0>[q] Sz;
   int<lower=0, upper=1> approach;
   real mu_beta;
-  real<lower=0> sigma_beta;
+  array[p] real sigma_beta;
   real mu_psi;
-  real<lower=0> sigma_psi;
+  array[q] real sigma_psi;
+  int<lower=0, upper=1> has_int_z;
+  int<lower=0, upper=1> has_int_x;
+}
+
+transformed data{
+  int r = has_int_z + has_int_x;
 }
 
 parameters {
-  vector[q] psi_std;
-  vector[p] beta_std;
+  vector[has_int_z == 0 ? 0 : 1] coef_intercept_z;
+  vector[q] coef_psi;
+  vector[has_int_x == 0 ? 0 : 1] coef_intercept_x;
+  vector[p] coef_beta;
 }
 
 transformed parameters{
-  vector[q] psi;
-  vector[p] beta;
+  vector[has_int_z == 0 ? 0 : 1] intercept_z;
+  vector[q] psi = coef_psi ./ Sz;
+  vector[has_int_x == 0 ? 0 : 1] intercept_x;
+  vector[p] beta = coef_beta ./ Sx;
 
-  if(p==1){
-    beta[1] = beta_std[1]/x_sd[1];
-  }else{
-    beta[2:p] = beta_std[2:p] ./ x_sd[2:p];
-    beta[1] = beta_std[1]/x_sd[1] - x_mean[2:p]*beta[2:p];
+  if(has_int_z == 1){
+    intercept_z = coef_intercept_z - zbar*psi;
   }
-
-  if(q==1){
-    psi[1] = psi_std[1]/z_sd[1];
-  }else{
-    psi[2:q] = psi_std[2:q] ./ z_sd[2:q];
-    psi[1] = psi_std[1]/z_sd[1] - z_mean[2:q]*psi[2:q];
+  if(has_int_x == 1){
+    intercept_x = coef_intercept_x - xbar*beta;
   }
 }
 
 model{
     // likelihood:
-    vector[n] loglik = loglik_zibellreg(y, X, Z, beta_std, psi_std, link1, link2);
+    vector[n] loglik = loglik_zibellreg(y, X, Z, coef_intercept_z, coef_intercept_x, coef_psi, coef_beta, link1, link2, offset1, offset2, has_int_z, has_int_x, zbar, xbar, Sz, Sx);
     target += sum(loglik);
     if(approach==1){
       // prior distributions:
-      beta_std ~ normal(mu_beta, sigma_beta);
-      psi_std ~ normal(mu_psi, sigma_psi);
+      coef_beta ~ normal(mu_beta, sigma_beta);
+      coef_psi ~ normal(mu_psi, sigma_psi);
     }
 }
 
 
-generated quantities{
-  vector[n] log_lik = loglik_zibellreg(y, X, Z, beta, psi, link1, link2);
-}
+ generated quantities{
+  vector[approach == 1 ? n : 0] log_lik;
+  if(approach == 1){  
+    log_lik = loglik_zibellreg(y, X, Z, coef_intercept_z, coef_intercept_x, coef_psi, coef_beta, link1, link2, offset1, offset2, has_int_z, has_int_x, zbar, xbar, Sz, Sx);
+  }
+ }
 
 

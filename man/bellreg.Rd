@@ -8,9 +8,9 @@ bellreg(
   formula,
   data = NULL,
   approach = c("mle", "bayes"),
-  hessian = TRUE,
   link = c("log", "sqrt", "identity"),
-  hyperpars = list(mu_beta = 0, sigma_beta = 10),
+  priors = prior_spec(list(intercept ~ normal(0, 10), beta ~ normal(0, 2.5)), autoscale =
+    TRUE),
   ...
 )
 }
@@ -21,11 +21,9 @@ bellreg(
 
 \item{approach}{approach to be used to fit the model (mle: maximum likelihood; bayes: Bayesian approach).}
 
-\item{hessian}{hessian logical; If TRUE (default), the hessian matrix is returned when approach="mle".}
-
 \item{link}{assumed link function (log, sqrt or identiy); default is log.}
 
-\item{hyperpars}{a list containing the hyperparameters associated with the prior distribution of the regression coefficients; if not specified then default choice is hyperpars = c(mu_beta = 0, sigma_beta = 10).}
+\item{priors}{a list containing the prior specification for the parameters; if NULL, default prior are used.}
 
 \item{...}{further arguments passed to either \code{rstan::optimizing} or \code{rstan::sampling}.}
 }

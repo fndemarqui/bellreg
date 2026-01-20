@@ -15,7 +15,7 @@ A data frame with 511 rows and 5 variables:
 }
 }
 \description{
-Data set taken from \insertCite{2012_Crawley}{bellreg} and posteriorly analyzed by \insertCite{2020_Lemonte}{bellreg}. The data includes the count of infected blood cells per square millimetre on microscope slides prepared from n = 511 randomly selected individuals.
+Data set taken from \insertCite{2012_Crawley;textual}{bellreg} and posteriorly analyzed by \insertCite{2020_Lemonte;textual}{bellreg}. The data includes the count of infected blood cells per square millimetre on microscope slides prepared from n = 511 randomly selected individuals.
 }
 \references{
 \insertRef{2012_Crawley}{bellreg}

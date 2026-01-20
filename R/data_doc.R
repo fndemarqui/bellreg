@@ -3,7 +3,7 @@
 #' @name cells
 #' @docType data
 #' @keywords datasets
-#' @description Data set taken from \insertCite{2012_Crawley}{bellreg} and posteriorly analyzed by \insertCite{2020_Lemonte}{bellreg}. The data includes the count of infected blood cells per square millimetre on microscope slides prepared from n = 511 randomly selected individuals.
+#' @description Data set taken from \insertCite{2012_Crawley;textual}{bellreg} and posteriorly analyzed by \insertCite{2020_Lemonte;textual}{bellreg}. The data includes the count of infected blood cells per square millimetre on microscope slides prepared from n = 511 randomly selected individuals.
 #' @format A data frame with 511 rows and 5 variables:
 #' \itemize{
 #'   \item cells: count of infected blood cells per square millimetre on microscope slides
@@ -26,7 +26,7 @@ NULL
 #' @name faults
 #' @docType data
 #' @keywords datasets
-#' @description Data set taken from \insertCite{1982_Hinde}{bellreg} and posteriorly analyzed by \insertCite{2018_Castellares}{bellreg}. The data contains the number of faults in rolls of fabric of different lengths.
+#' @description Data set taken from \insertCite{1982_Hinde;textual}{bellreg} and posteriorly analyzed by \insertCite{2018_Castellares;textual}{bellreg}. The data contains the number of faults in rolls of fabric of different lengths.
 #' @format A data frame with 32 rows and 2 variables:
 #' \itemize{
 #'   \item nf: number of faults in rolls of fabric of different lengths.

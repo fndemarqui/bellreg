@@ -35,11 +35,11 @@ dtpois <- function(x, lambda, lower, upper, log = FALSE) {
   upper <- rep_len(upper, n)
 
   # Calculate normalization constant: P(a < X <= b)
-  pa <- ppois(lower, lambda)
-  pb <- ppois(upper, lambda)
+  pa <- stats::ppois(lower, lambda)
+  pb <- stats::ppois(upper, lambda)
 
   # Log-density of standard Poisson
-  log_num <- dpois(x, lambda, log = TRUE)
+  log_num <- stats::dpois(x, lambda, log = TRUE)
 
   # Log-density of truncated Poisson
   # result = log( dpois / (pb - pa) )
@@ -79,9 +79,9 @@ ptpois <- function(q, lambda, lower, upper, lower.tail = TRUE, log.p = FALSE) {
   lower <- rep_len(lower, n)
   upper <- rep_len(upper, n)
   
-  pa <- ppois(lower, lambda)
-  pb <- ppois(upper, lambda)
-  pq <- ppois(q, lambda)
+  pa <- stats::ppois(lower, lambda)
+  pb <- stats::ppois(upper, lambda)
+  pq <- stats::ppois(q, lambda)
   
   # CDF formula: (P(X <= q) - P(X <= a)) / (P(X <= b) - P(X <= a))
   p <- (pq - pa) / (pb - pa)
@@ -120,12 +120,12 @@ qtpois <- function(p, lambda, lower, upper, lower.tail = TRUE, log.p = FALSE) {
   lower <- rep_len(lower, n)
   upper <- rep_len(upper, n)
 
-  pa <- ppois(lower, lambda)
-  pb <- ppois(upper, lambda)
+  pa <- stats::ppois(lower, lambda)
+  pb <- stats::ppois(upper, lambda)
 
   # Inverse CDF using the probability transform
   # Target p_raw = pa + p * (pb - pa)
-  res <- qpois(pa + p * (pb - pa), lambda)
+  res <- stats::qpois(pa + p * (pb - pa), lambda)
 
   invalid <- lambda < 0 | upper < lower | p < 0 | p > 1
   res[invalid] <- NaN

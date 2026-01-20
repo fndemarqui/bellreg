@@ -20,9 +20,11 @@ print.summary.bellreg <- function(x, ...){
     # cat("\n")
     cat("logLik =", x$logLik, " ", "AIC =", x$AIC,"\n")
   }else{
-    cat("\n")
+    cat("Call:\n")
     print(x$call)
+    print(x$priors)
     cat("\n")
+    cat("Summary of the posterior distribution:", "\n")
     print(x$coefficients)
     cat("\n")
     cat("Inference for Stan model: ", x$model_name, '.\n', sep = '')
@@ -48,9 +50,9 @@ print.summary.bellreg <- function(x, ...){
 summary.bellreg <- function(object, ...){
 
   if(object$approach == "mle"){
-    p <- object$p
     labels <- object$labels
     coefficients <- object$fit$par
+    p <- length(coefficients)
     V <- vcov(object)
 
     se <- sqrt(diag(V))
@@ -60,12 +62,7 @@ summary.bellreg <- function(object, ...){
                  z.value = zval,
                  p.value = 2*stats::pnorm(-abs(zval)))
 
-    if(p==1)
-    {
-      TAB <- t(as.matrix(TAB[1:p,]))
-    }else{
-      TAB <- TAB[1:p,]
-    }
+    TAB <- TAB[1:p, , drop = FALSE]
 
     rownames(TAB) <- labels
     res <- list(call=object$call,
@@ -74,15 +71,19 @@ summary.bellreg <- function(object, ...){
                 AIC = object$AIC)
   }else{
     labels <- object$labels
-    s <- rstan::summary(object$fit, pars=c("beta"))
-    TAB <- round(s$summary, digits = 3)
-    rownames(TAB) <- labels
+    s <- rstan::summary(object$fit)
+    TAB <- round(s$summary, digits = 4)
+    rn <- row.names(TAB)
+    o <- c(grep("log_lik", rn), grep("coef_", rn), grep("lp__", rn))
+    TAB <- TAB[-o, , drop = FALSE]
+    row.names(TAB) <- labels
     n_kept <- object$fit@sim$n_save - object$fit@sim$warmup2
 
-    res <- list(call=object$call, coefficients=TAB,
+    res <- list(call=object$call, coefficients=TAB[, -c(2, 5, 7), drop = FALSE],
                 n_kept=n_kept, model_name=object$fit@model_name,
                 chains=object$fit@sim$chains, warmup=object$fit@sim$warmup,
-                thin=object$fit@sim$thin, iter=object$fit@sim$iter, approach=object$approach)
+                thin=object$fit@sim$thin, iter=object$fit@sim$iter, approach=object$approach,
+                priors = object$priors)
 
   }
   res$approach <- object$approach

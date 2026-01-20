@@ -30,7 +30,7 @@ AIC.bellreg <- function(object, ..., k = 2){
   aic <- c()
   npars <- c()
   for(j in 1:J){
-    loglik <- objects[[j]]$logLik
+    loglik <- objects[[j]]$loglik
     npars[j] <- objects[[j]]$p
     aic[j] <- -2*loglik + k*npars[j]
   }
@@ -72,7 +72,7 @@ AIC.zibellreg <- function(object, ..., k = 2){
   aic <- c()
   npars <- c()
   for(j in 1:J){
-    loglik <- objects[[j]]$logLik
+    loglik <- objects[[j]]$loglik
     npars[j] <- objects[[j]]$p + objects[[j]]$q
     aic[j] <- -2*loglik + k*npars[j]
   }

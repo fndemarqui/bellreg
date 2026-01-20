@@ -11,7 +11,8 @@ zibellreg(
   hessian = TRUE,
   link1 = c("logit", "probit", "cloglog", "cauchy"),
   link2 = c("log", "sqrt", "identity"),
-  hyperpars = list(mu_psi = 0, sigma_psi = 10, mu_beta = 0, sigma_beta = 10),
+  priors = prior_spec(list(intercept ~ normal(0, 10), beta ~ normal(0, 2.5)), autoscale =
+    TRUE),
   ...
 )
 }
@@ -28,7 +29,7 @@ zibellreg(
 
 \item{link2}{assumed link function for count distribution (log, sqrt or identiy); default is log.}
 
-\item{hyperpars}{a list containing the hyperparameters associated with the prior distribution of the regression coefficients; if not specified then default choice is hyperpars = c(mu_psi = 0, sigma_psi = 10, mu_beta = 0, sigma_beta = 10).}
+\item{priors}{a list containing the prior specification for the parameters; if NULL, default prior are used.}
 
 \item{...}{further arguments passed to either \code{rstan::optimizing} or \code{rstan::sampling}.}
 }
