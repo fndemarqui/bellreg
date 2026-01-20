@@ -31,6 +31,6 @@ data(faults)
 fit <- bellreg(nf ~ lroll, data=faults)
 coef(fit)
 #> (Intercept)       lroll 
-#> 0.985273862 0.001909302 
+#> 0.985242201 0.001909341 
 # }
 ```

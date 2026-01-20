@@ -31,13 +31,9 @@ with the degenerated and Bell count distributions, respectively.
 data(cells)
 fit <- zibellreg(cells ~ smoker + gender|smoker + gender, data = cells)
 coef(fit)
-#> $`Degenerated dist.`
-#> (Intercept)      smoker      gender 
-#>  -1.9517137   2.1759076  -0.4959336 
-#> 
-#> $`Bell dist.`
-#> (Intercept)      smoker      gender 
-#>  0.71671200 -0.61177871  0.03614774 
-#> 
+#>  zero-(Intercept)       zero-smoker       zero-gender count-(Intercept) 
+#>       -1.95194107        2.17614547       -0.49590496        0.71655217 
+#>      count-smoker      count-gender 
+#>       -0.61170559        0.03626424 
 # }
 ```

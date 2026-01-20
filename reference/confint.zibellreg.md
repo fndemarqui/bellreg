@@ -40,19 +40,12 @@ confint(object, parm = NULL, level = 0.95, ...)
 data(cells)
 fit <- zibellreg(cells ~ smoker+gender|smoker+gender, data = cells, approach = "mle")
 confint(fit)
-#> Warning: longer object length is not a multiple of shorter object length
-#> Warning: longer object length is not a multiple of shorter object length
-#> $`Degenerated dist.`
-#>            2.5%      97.5%
-#> [1,] -3.6101494 -0.2955029
-#> [2,]  0.5622502  3.7914147
-#> [3,] -1.3203577  0.3286924
-#> 
-#> $`Bell dist.`
-#>            2.5%      97.5%
-#> [1,]  0.3639722  1.0690779
-#> [2,] -0.9712645 -0.2522553
-#> [3,] -0.3115964  0.3841420
-#> 
+#>                         2.5%      97.5%
+#> zero-(Intercept)  -3.6074789 -0.2964032
+#> zero-smoker        0.5632866  3.7890044
+#> zero-gender       -1.3202804  0.3284704
+#> count-(Intercept)  0.3640604  1.0690439
+#> count-smoker      -0.9711622 -0.2522490
+#> count-gender      -0.3115912  0.3841197
 # }
 ```

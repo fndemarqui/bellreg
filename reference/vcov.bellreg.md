@@ -34,7 +34,7 @@ data(faults)
 fit <- bellreg(nf ~ lroll, data = faults)
 vcov(fit)
 #>               (Intercept)         lroll
-#> (Intercept)  0.1103531062 -1.556123e-04
-#> lroll       -0.0001556123  2.401338e-07
+#> (Intercept)  0.1103533481 -1.556126e-04
+#> lroll       -0.0001556126  2.401343e-07
 # }
 ```

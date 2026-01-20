@@ -18,13 +18,13 @@ Source:
 [`DESCRIPTION`](https://github.com/fndemarqui/bellreg/blob/master/DESCRIPTION)
 
 Demarqui F (2026). *bellreg: Count Regression Models Based on the Bell
-Distribution*. R package version 0.0.2.2,
+Distribution*. R package version 0.1.0,
 <https://github.com/fndemarqui/bellreg>.
 
     @Manual{,
       title = {bellreg: Count Regression Models Based on the Bell Distribution},
       author = {Fabio Demarqui},
       year = {2026},
-      note = {R package version 0.0.2.2},
+      note = {R package version 0.1.0},
       url = {https://github.com/fndemarqui/bellreg},
     }

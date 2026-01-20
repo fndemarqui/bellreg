@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bellreg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,20 +77,20 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cells</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="zibellreg.html">zibellreg</a></span><span class="op">(</span><span class="va">cells</span> <span class="op">~</span> <span class="va">smoker</span> <span class="op">+</span> <span class="va">gender</span><span class="op">|</span><span class="va">smoker</span> <span class="op">+</span> <span class="va">gender</span>, data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             (Intercept)      smoker      gender (Intercept)      smoker</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  0.71363597 -0.66583696 -0.16290329  0.08674210 -0.06933872</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> smoker      -0.66583696  0.67731517  0.11224003 -0.07505099  0.07899997</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gender      -0.16290329  0.11224003  0.17691599 -0.03594151  0.02389435</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  0.08674210 -0.07505099 -0.03594151  0.03234666 -0.02221502</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> smoker      -0.06933872  0.07899997  0.02389435 -0.02221502  0.03363698</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gender      -0.05316440  0.03930690  0.04234480 -0.02586169  0.01346615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  gender</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) -0.05316440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> smoker       0.03930690</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gender       0.04234480</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) -0.02586169</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> smoker       0.01346615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gender       0.03149979</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   zero-(Intercept) zero-smoker zero-gender count-(Intercept)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> zero-(Intercept)        0.71348038 -0.66568664 -0.16288857        0.08672343</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> zero-smoker            -0.66568664  0.67716821  0.11222769       -0.07503321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> zero-gender            -0.16288857  0.11222769  0.17691060       -0.03593915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> count-(Intercept)       0.08672343 -0.07503321 -0.03593915        0.03234459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> count-smoker           -0.06932296  0.07898434  0.02389286       -0.02221333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> count-gender           -0.05315715  0.03930040  0.04234299       -0.02586077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   count-smoker count-gender</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> zero-(Intercept)   -0.06932296  -0.05315715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> zero-smoker         0.07898434   0.03930040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> zero-gender         0.02389286   0.04234299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> count-(Intercept)  -0.02221333  -0.02586077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> count-smoker        0.03363541   0.01346544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> count-gender        0.01346544   0.03149935</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

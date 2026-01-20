@@ -14,18 +14,18 @@ summary(mle)
 #> 
 #> Zero-inflated regression coefficients:
 #>             Estimate   StdErr z.value  p.value   
-#> (Intercept) -1.95125  0.84424 -2.3113 0.020819 * 
-#> smoker       2.17553  0.82248  2.6451 0.008167 **
-#> gender      -0.49601  0.42059 -1.1793 0.238275   
+#> (Intercept) -1.95194  0.84468 -2.3109 0.020840 * 
+#> smoker       2.17615  0.82290  2.6445 0.008182 **
+#> gender      -0.49590  0.42061 -1.1790 0.238390   
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> 
 #> Count regression coefficients:
 #>              Estimate    StdErr z.value   p.value    
-#> (Intercept)  0.716784  0.179844  3.9856 6.731e-05 ***
-#> smoker      -0.611842  0.183398 -3.3361 0.0008495 ***
-#> gender       0.036218  0.177484  0.2041 0.8383045    
+#> (Intercept)  0.716552  0.179846  3.9843 6.769e-05 ***
+#> smoker      -0.611706  0.183400 -3.3354 0.0008519 ***
+#> gender       0.036264  0.177481  0.2043 0.8380972    
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
@@ -39,56 +39,22 @@ summary(bayes)
 #> zibellreg(formula = cells ~ 1 | smoker + gender, data = cells, 
 #>     approach = "bayes", refresh = FALSE)
 #> 
+#> Prior specifications: 
+#> intercept ~ normal(0, 10)
+#> psi ~ normal(mu = 0, sigma = 2.5)
+#> beta ~ normal(0, 2.5)
+#> 
 #> Zero-inflated regression coefficients:
-#>               mean se_mean    sd   2.5%    25%   50%    75%  97.5%    n_eff
-#> (Intercept) -1.156   0.008 0.329 -1.877 -1.342 -1.12 -0.933 -0.618 1788.084
-#>              Rhat
-#> (Intercept) 1.003
+#>      mean        sd      2.5%       50%     97.5%     n_eff      Rhat 
+#>   -1.1621    0.3179   -1.8889   -1.1278   -0.6138 1629.4543    1.0015 
 #> 
 #> Count regression coefficients:
-#>               mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff
-#> (Intercept)  0.720   0.003 0.147  0.434  0.620  0.721  0.818  1.011 2696.769
-#> smoker      -1.074   0.003 0.148 -1.368 -1.170 -1.072 -0.977 -0.783 2371.508
-#> gender       0.172   0.003 0.140 -0.100  0.078  0.175  0.266  0.452 2948.729
-#>              Rhat
-#> (Intercept) 1.002
-#> smoker      1.002
-#> gender      1.000
+#>                mean     sd    2.5%     50%   97.5%    n_eff   Rhat
+#> (Intercept)  0.7177 0.1445  0.4365  0.7204  0.9915 3096.655 1.0001
+#> smoker      -1.0761 0.1456 -1.3648 -1.0745 -0.7880 2524.780 1.0005
+#> gender       0.1701 0.1413 -0.0988  0.1707  0.4433 2998.055 0.9999
 #> --- 
 #> Inference for Stan model: zibellreg.
 #> 4 chains, each with iter=2000; warmup=1000; thin=1; 
 #> post-warmup draws per chain=1000, total post-warmup draws=4000.
-
-log_lik <- loo::extract_log_lik(bayes$fit)
-loo::loo(log_lik)
-#> Warning: Some Pareto k diagnostic values are too high. See help('pareto-k-diagnostic') for details.
-#> 
-#> Computed from 4000 by 511 log-likelihood matrix.
-#> 
-#>          Estimate    SE
-#> elpd_loo  -1094.2  56.0
-#> p_loo       247.0  24.1
-#> looic      2188.4 112.0
-#> ------
-#> MCSE of elpd_loo is NA.
-#> MCSE and ESS estimates assume independent draws (r_eff=1).
-#> 
-#> Pareto k diagnostic values:
-#>                          Count Pct.    Min. ESS
-#> (-Inf, 0.7]   (good)     418   81.8%   2752    
-#>    (0.7, 1]   (bad)        1    0.2%   <NA>    
-#>    (1, Inf)   (very bad)  92   18.0%   <NA>    
-#> See help('pareto-k-diagnostic') for details.
-loo::waic(log_lik)
-#> Warning: 
-#> 93 (18.2%) p_waic estimates greater than 0.4. We recommend trying loo instead.
-#> 
-#> Computed from 4000 by 511 log-likelihood matrix.
-#> 
-#>           Estimate   SE
-#> elpd_waic  -1016.5 49.1
-#> p_waic       169.4 15.8
-#> waic        2033.0 98.2
-#> 
-#> 93 (18.2%) p_waic estimates greater than 0.4. We recommend trying loo instead.
 ```

@@ -43,7 +43,7 @@ data(faults)
 fit <- bellreg(nf ~ lroll, data = faults)
 confint(fit)
 #>                     2.5%       97.5%
-#> (Intercept) 0.3341774576 1.636354354
-#> lroll       0.0009488571 0.002869757
+#> (Intercept) 0.3341524663 1.636331936
+#> lroll       0.0009488904 0.002869792
 # }
 ```

@@ -1,8 +1,8 @@
 # Faults data set
 
-Data set taken from ( ) and posteriorly analyzed by (Castellares et al.
-2018) . The data contains the number of faults in rolls of fabric of
-different lengths.
+Data set taken from Hinde (1982) and posteriorly analyzed by Castellares
+et al. (2018) . The data contains the number of faults in rolls of
+fabric of different lengths.
 
 ## Format
 
@@ -20,7 +20,6 @@ Mathematical Modelling*, **56**, 172 - 185.
 [doi:10.1016/j.apm.2017.12.014](https://doi.org/10.1016/j.apm.2017.12.014)
 .  
   
-Hind J (ed.) (1982). *Compound Poisson Regression Models*, volume 14 of
-*Lecture Notes in Statistics*. ISBN 978-0-387-90777-2,
-[doi:10.1007/978-1-4612-5771-4_11](https://doi.org/10.1007/978-1-4612-5771-4_11)
-.
+Hinde J (1982). “Compound Poisson Regression Models.” In Gilchrist R
+(ed.), *GLIM 82: Proceedings of the International Conference on
+Generalised Linear Models*, 109–121. ISBN 978-1-4612-5771-4.

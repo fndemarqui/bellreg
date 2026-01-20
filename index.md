@@ -26,11 +26,10 @@ library(bellreg)
 data(faults)
 
 # ML approach:
-mle <- bellreg(nf ~ lroll, data = faults, approach = "mle", init = 0)
+mle <- bellreg(nf ~ lroll, data = faults, approach = "mle")
 summary(mle)
 #> Call:
-#> bellreg(formula = nf ~ lroll, data = faults, approach = "mle", 
-#>     init = 0)
+#> bellreg(formula = nf ~ lroll, data = faults, approach = "mle")
 #> 
 #> Coefficients:
 #>               Estimate     StdErr z.value   p.value    
@@ -39,18 +38,23 @@ summary(mle)
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
-#> logLik = -88.96139   AIC = 181.9228
+#> logLik =   AIC = 181.9228
 
 # Bayesian approach:
 bayes <- bellreg(nf ~ lroll, data = faults, approach = "bayes", refresh = FALSE)
 summary(bayes)
-#> 
+#> Call:
 #> bellreg(formula = nf ~ lroll, data = faults, approach = "bayes", 
 #>     refresh = FALSE)
 #> 
-#>              mean se_mean    sd  2.5%   25%   50%   75% 97.5%    n_eff  Rhat
-#> (Intercept) 0.984   0.007 0.334 0.331 0.758 0.978 1.213 1.627 2222.313 1.001
-#> lroll       0.002   0.000 0.000 0.001 0.002 0.002 0.002 0.003 2478.992 1.001
+#> Prior specifications: 
+#> intercept ~ normal(0, 10)
+#> beta ~ normal(0, 2.5)
+#> 
+#> Summary of the posterior distribution: 
+#>               mean     sd   2.5%    50%  97.5%    n_eff   Rhat
+#> (Intercept) 0.9934 0.3320 0.3328 0.9947 1.6252 2097.753 1.0025
+#> lroll       0.0019 0.0005 0.0009 0.0019 0.0029 2337.698 1.0022
 #> 
 #> Inference for Stan model: bellreg.
 #> 4 chains, each with iter=2000; warmup=1000; thin=1; 

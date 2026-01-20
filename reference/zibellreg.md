@@ -12,7 +12,8 @@ zibellreg(
   hessian = TRUE,
   link1 = c("logit", "probit", "cloglog", "cauchy"),
   link2 = c("log", "sqrt", "identity"),
-  hyperpars = list(mu_psi = 0, sigma_psi = 10, mu_beta = 0, sigma_beta = 10),
+  priors = prior_spec(list(intercept ~ normal(0, 10), beta ~ normal(0, 2.5)), autoscale =
+    TRUE),
   ...
 )
 ```
@@ -52,12 +53,10 @@ zibellreg(
   assumed link function for count distribution (log, sqrt or identiy);
   default is log.
 
-- hyperpars:
+- priors:
 
-  a list containing the hyperparameters associated with the prior
-  distribution of the regression coefficients; if not specified then
-  default choice is hyperpars = c(mu_psi = 0, sigma_psi = 10, mu_beta =
-  0, sigma_beta = 10).
+  a list containing the prior specification for the parameters; if NULL,
+  default prior are used.
 
 - ...:
 
@@ -85,18 +84,18 @@ summary(mle)
 #> 
 #> Zero-inflated regression coefficients:
 #>             Estimate   StdErr z.value  p.value   
-#> (Intercept) -1.95228  0.84486 -2.3108 0.020845 * 
-#> smoker       2.17643  0.82307  2.6443 0.008186 **
-#> gender      -0.49560  0.42057 -1.1784 0.238639   
+#> (Intercept) -1.95194  0.84468 -2.3109 0.020840 * 
+#> smoker       2.17615  0.82290  2.6445 0.008182 **
+#> gender      -0.49590  0.42061 -1.1790 0.238390   
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> 
 #> Count regression coefficients:
-#>             Estimate   StdErr z.value   p.value    
-#> (Intercept)  0.71652  0.17985  3.9841 6.774e-05 ***
-#> smoker      -0.61170  0.18340 -3.3354 0.0008518 ***
-#> gender       0.03633  0.17747  0.2047 0.8378028    
+#>              Estimate    StdErr z.value   p.value    
+#> (Intercept)  0.716552  0.179846  3.9843 6.769e-05 ***
+#> smoker      -0.611706  0.183400 -3.3354 0.0008519 ***
+#> gender       0.036264  0.177481  0.2043 0.8380972    
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
@@ -110,21 +109,20 @@ summary(bayes)
 #> zibellreg(formula = cells ~ 1 | smoker + gender, data = cells, 
 #>     approach = "bayes", refresh = FALSE)
 #> 
+#> Prior specifications: 
+#> intercept ~ normal(0, 10)
+#> psi ~ normal(mu = 0, sigma = 2.5)
+#> beta ~ normal(0, 2.5)
+#> 
 #> Zero-inflated regression coefficients:
-#>               mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff
-#> (Intercept) -1.148   0.007 0.317 -1.856 -1.322 -1.119 -0.931 -0.623 2008.085
-#>              Rhat
-#> (Intercept) 1.002
+#>      mean        sd      2.5%       50%     97.5%     n_eff      Rhat 
+#>   -1.1607    0.3127   -1.8624   -1.1355   -0.6298 2146.9654    0.9999 
 #> 
 #> Count regression coefficients:
-#>               mean se_mean    sd   2.5%    25%    50%    75%  97.5%    n_eff
-#> (Intercept)  0.716   0.003 0.144  0.437  0.618  0.716  0.815  0.998 3186.806
-#> smoker      -1.069   0.003 0.143 -1.353 -1.163 -1.068 -0.973 -0.783 2654.165
-#> gender       0.176   0.003 0.141 -0.098  0.078  0.175  0.272  0.455 3094.795
-#>             Rhat
-#> (Intercept)    1
-#> smoker         1
-#> gender         1
+#>                mean     sd    2.5%     50%   97.5%    n_eff   Rhat
+#> (Intercept)  0.7199 0.1455  0.4345  0.7186  1.0134 2996.950 0.9996
+#> smoker      -1.0774 0.1419 -1.3524 -1.0780 -0.7969 2405.594 1.0011
+#> gender       0.1701 0.1393 -0.0970  0.1717  0.4440 3181.463 0.9994
 #> --- 
 #> Inference for Stan model: zibellreg.
 #> 4 chains, each with iter=2000; warmup=1000; thin=1; 

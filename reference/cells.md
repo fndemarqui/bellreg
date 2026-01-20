@@ -1,7 +1,7 @@
 # Cells data set
 
-Data set taken from (Crawley 2012) and posteriorly analyzed by (Lemonte
-et al. 2020) . The data includes the count of infected blood cells per
+Data set taken from Crawley (2012) and posteriorly analyzed by Lemonte
+et al. (2020) . The data includes the count of infected blood cells per
 square millimetre on microscope slides prepared from n = 511 randomly
 selected individuals.
 
