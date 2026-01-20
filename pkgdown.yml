@@ -1,10 +1,10 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   bellreg: bellreg.html
   zibellreg: zibellreg.html
-last_built: 2024-10-23T00:59Z
+last_built: 2026-01-20T19:38Z
 urls:
   reference: https://fndemarqui.github.io/bellreg/reference
   article: https://fndemarqui.github.io/bellreg/articles
